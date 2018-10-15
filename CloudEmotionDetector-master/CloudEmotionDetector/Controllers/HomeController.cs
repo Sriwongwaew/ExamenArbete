@@ -15,6 +15,8 @@ namespace CloudDetector.Controllers
 {
     public class HomeController : Controller
     {
+        const string subscriptionKey = "0f02fdf50aa34b43a890cc185515e46f";
+
         public IActionResult Index()
         {
             return View();
@@ -34,8 +36,9 @@ namespace CloudDetector.Controllers
                     var client = new HttpClient();
                     var queryString = HttpUtility.ParseQueryString(string.Empty);
 
+
                     // Request headers, include your own subscription key
-                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "{0f02fdf50aa34b43a890cc185515e46f");
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
   
                     var uri = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect" + queryString;
 
