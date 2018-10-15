@@ -1,16 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
 namespace Mood.Controllers
 {
+    
+    //public interface IFormFile
+    //{
+    //    string ContentType { get; }
+    //    string ContentDisposition { get; }
+    //    IHeaderDictionary Headers { get; }
+    //    long Length { get; }
+    //    string Name { get; }
+    //    string FileName { get; }
+    //    Stream OpenReadStream();
+    //    void CopyTo(Stream target);
+    //    Task CopyToAsync(Stream target, CancellationToken cancellationToken);
+    //    Task CopyToAsync(FileStream stream);
+    //}
+
     public class HomeController : Controller
     {
         const string subscriptionKey = "0f02fdf50aa34b43a890cc185515e46f";
@@ -23,15 +42,9 @@ namespace Mood.Controllers
             return RedirectToAction("Index", "Mood");
         }
 
-        public IActionResult FilePath(string pic)
-        {
-            MakeAnalysisRequest(pic);
 
 
-            return View();
-        }
-
-        static async void MakeAnalysisRequest(string pic)
+        static async Task<string> MakeAnalysisRequest(string pic)
         {
             HttpClient client = new HttpClient();
 
@@ -67,9 +80,7 @@ namespace Mood.Controllers
                 string contentString = await response.Content.ReadAsStringAsync();
 
                 // Display the JSON response.
-                Console.WriteLine("\nResponse:\n");
-                Console.WriteLine(JsonPrettyPrint(contentString));
-                Console.WriteLine("\nPress Enter to exit...");
+                 return contentString;
             }
         }
 
@@ -145,8 +156,34 @@ namespace Mood.Controllers
             return sb.ToString().Trim();
         }
 
-        
+        [HttpPost("UploadFiles")]
+        public async Task<IActionResult> Post(IFormFile file)
+        {
+            //long size = files.Sum(f => f.Length);
 
+            var filePath = Path.GetTempFileName();
+
+            //foreach (var formFile in files)
+            //{
+            //    if (formFile.Length > 0)
+            //    {
+            //        using (var stream = new FileStream(filePath, FileMode.Create))
+            //        {
+            //             await formFile.CopyToAsync(stream);
+            //        }
+
+            //    }
+            //}
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var print = await MakeAnalysisRequest(filePath);
+            return Ok(print);
+        }
     }
+
 }
 
