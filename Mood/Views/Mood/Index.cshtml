@@ -9,3 +9,11 @@
     <input type="file" name="pic" accept="image/*">
     <input type="submit">
 </form>
+
+@using (Html.BeginForm("FileUpload", "Home", FormMethod.Post,
+                           new { enctype = "multipart/form-data" }))
+{
+    <label for="file">Upload Image:</label>
+    <input type="file" name="file" id="file" style="width: 100%;" />
+    <input type="submit" value="Upload" class="submit" />
+}
