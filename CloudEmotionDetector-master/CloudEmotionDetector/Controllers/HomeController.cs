@@ -1,20 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CloudDetector.Models;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Mood.Controllers
+namespace CloudDetector.Controllers
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Mood");
+            return View();
         }
 
         [HttpPost]
@@ -32,9 +35,9 @@ namespace Mood.Controllers
                     var queryString = HttpUtility.ParseQueryString(string.Empty);
 
                     // Request headers, include your own subscription key
-                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "{ enter your subscription key }");
-
-                    var uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize?" + queryString;
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "{0f02fdf50aa34b43a890cc185515e46f");
+  
+                    var uri = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect" + queryString;
 
                     HttpResponseMessage response;
 
@@ -92,4 +95,3 @@ namespace Mood.Controllers
         }
     }
 }
-

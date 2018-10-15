@@ -1,9 +1,6 @@
-﻿@model Mood.ViewModels.IndexViewModel
-
-@{
-    ViewBag.Title = "Home page";
+﻿@{
+    ViewData["Title"] = "Home Page";
 }
-
 
 <h2>Upload image for emotion detection</h2>
 
@@ -15,7 +12,7 @@
     The detectable face size range is 36x36 to 4096x4096 pixels
 </p>
 <fieldset>
-    <input type="file" id="fileControl" accept="image/*" />
+    <input type="file" id="fileControl" accept="image/*"/>
     <img id="myImgage" src="#" alt="" style="position:absolute;top:300px; left:50px" />
     <canvas id="myCanvas" style="position:absolute;top:300px; left:50px" width="1000" height="1000"></canvas>
     <div id="myEmotion" style="color:white;font-size:large;"></div>
@@ -30,7 +27,7 @@
         var ctx = canvas.getContext('2d');
 
         function upload(json) {
-            var result = JSON.parse(json);
+            var result = JSON.parse(json);            
 
             //draw rectangle around face
             ctx.lineWidth = "6";
