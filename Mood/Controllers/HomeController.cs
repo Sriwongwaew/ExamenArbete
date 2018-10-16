@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Mood.Models;
 using Mood.Models.FaceApiData;
+using Mood.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -92,11 +93,12 @@ namespace Mood.Controllers
             }
 
             var print = await MakeAnalysisRequest(filePath);
-            ConvertToEmotion(print);
-            return Ok();
+
+            return View("Result", ConvertToEmotion(print));
+           
         }
 
-        public void ConvertToEmotion(string print)
+        public PlaylistViewModel ConvertToEmotion(string print)
         {
             var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
 
@@ -149,13 +151,49 @@ namespace Mood.Controllers
             };
 
             var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
-            LinkPlaylistDependingOnEmotion();
+            string result = primaryEmotion.EmotionName;
+            PlaylistViewModel Playlist = LinkPlaylistDependingOnEmotion(result);
+            return Playlist;
 
         }
 
-        private void LinkPlaylistDependingOnEmotion()
+        public PlaylistViewModel LinkPlaylistDependingOnEmotion(string emotionResult)
         {
-            throw new NotImplementedException();
+
+            PlaylistViewModel result = new PlaylistViewModel();
+
+            if (emotionResult == "anger" || emotionResult == "contempt" || emotionResult == "disgust")
+            {
+                return result;
+
+            }
+            else if (emotionResult == "happiness")
+            {
+                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+            }
+            else if (emotionResult == "fear")
+            {
+                return result;
+
+            }
+            else if (emotionResult == "sadness")
+            {
+                return result;
+
+            }
+            else if (emotionResult == "surprise")
+            {
+                return result;
+
+            }
+            else if (emotionResult == "neutral")
+            {
+                return result;
+            }
+
+            return result;
         }
     }
 }
