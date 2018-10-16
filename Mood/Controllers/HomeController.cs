@@ -148,12 +148,9 @@ namespace Mood.Controllers
                 },
             };
 
-            foreach (var item in list)
-            {
-                Console.WriteLine(item.Value + item.EmotionName);
-            }
+            var primaryEmotion = list.OrderByDescending(x => x.Value).Take(1).ToList();
 
-            var strongestThreeEmotions = list.OrderByDescending(x => x.Value).Take(3).ToList();
+
 
         }
     }
