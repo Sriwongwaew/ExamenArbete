@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Mood.Models.FaceApiData;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace Mood.Controllers
         const string uriBase =
         "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
 
+        //string print = "";
 
         public IActionResult Index()
         {
@@ -89,8 +91,25 @@ namespace Mood.Controllers
             }
 
             var print = await MakeAnalysisRequest(filePath);
-            return Ok(print);
+            ConvertToEmotion(print);
+            return Ok();
         }
+
+        public void ConvertToEmotion(string print)
+        {
+            var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
+
+            var AllEmotion = emotions[0].faceAttributes.emotion;
+
+
+            //scores.FirstOrDefault(x => x.Value == emotions[0].scores.Values.Max()).Key;
+
+
+
+
+        }
+
+
     }
 
 }
