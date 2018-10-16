@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Mood.Models;
 using Mood.Models.FaceApiData;
 using Newtonsoft.Json;
 using System;
@@ -95,12 +96,6 @@ namespace Mood.Controllers
             return Ok();
         }
 
-        public class Em
-        {
-            public double Value { get; set; }
-            public string EmotionName { get; set; }
-        }
-
         public void ConvertToEmotion(string print)
         {
             var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
@@ -122,41 +117,43 @@ namespace Mood.Controllers
                 new Em
                 {
                     EmotionName = "happiness",
-                    Value = AllEmotion.anger
+                    Value = AllEmotion.happiness
                 },
                 new Em
                 {
                     EmotionName = "fear",
-                    Value = AllEmotion.contempt
+                    Value = AllEmotion.fear
                 },
                 new Em
                 {
                     EmotionName = "sadness",
-                    Value = AllEmotion.anger
+                    Value = AllEmotion.sadness
                 },
                 new Em
                 {
                     EmotionName = "surprise",
-                    Value = AllEmotion.contempt
+                    Value = AllEmotion.surprise
                 },
                 new Em
                 {
                     EmotionName = "neutral",
-                    Value = AllEmotion.anger
+                    Value = AllEmotion.neutral
                 },
                 new Em
                 {
                     EmotionName = "disgust",
-                    Value = AllEmotion.contempt
+                    Value = AllEmotion.disgust
                 },
             };
 
-            var strongestThreeEmotions = list.OrderBy(x => x.Value).Take(3).ToList();
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.Value + item.EmotionName);
+            }
+
+            var strongestThreeEmotions = list.OrderByDescending(x => x.Value).Take(3).ToList();
 
         }
-
-
     }
-
 }
 
