@@ -148,10 +148,14 @@ namespace Mood.Controllers
                 },
             };
 
-            var primaryEmotion = list.OrderByDescending(x => x.Value).Take(1).ToList();
+            var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
+            LinkPlaylistDependingOnEmotion();
 
+        }
 
-
+        private void LinkPlaylistDependingOnEmotion()
+        {
+            throw new NotImplementedException();
         }
     }
 }
