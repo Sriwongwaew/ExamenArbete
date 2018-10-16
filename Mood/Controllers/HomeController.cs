@@ -95,17 +95,63 @@ namespace Mood.Controllers
             return Ok();
         }
 
+        public class Em
+        {
+            public double Value { get; set; }
+            public string EmotionName { get; set; }
+        }
+
         public void ConvertToEmotion(string print)
         {
             var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
 
-            var AllEmotion = emotions[0].faceAttributes.emotion;
+            Emotion AllEmotion = emotions[0].faceAttributes.emotion;
 
+            var list = new List<Em>
+            {
+                new Em
+                {
+                    EmotionName = "anger",
+                    Value = AllEmotion.anger
+                },
+                new Em
+                {
+                    EmotionName = "contempt",
+                    Value = AllEmotion.contempt
+                },
+                new Em
+                {
+                    EmotionName = "happiness",
+                    Value = AllEmotion.anger
+                },
+                new Em
+                {
+                    EmotionName = "fear",
+                    Value = AllEmotion.contempt
+                },
+                new Em
+                {
+                    EmotionName = "sadness",
+                    Value = AllEmotion.anger
+                },
+                new Em
+                {
+                    EmotionName = "surprise",
+                    Value = AllEmotion.contempt
+                },
+                new Em
+                {
+                    EmotionName = "neutral",
+                    Value = AllEmotion.anger
+                },
+                new Em
+                {
+                    EmotionName = "disgust",
+                    Value = AllEmotion.contempt
+                },
+            };
 
-            //scores.FirstOrDefault(x => x.Value == emotions[0].scores.Values.Max()).Key;
-
-
-
+            var strongestThreeEmotions = list.OrderBy(x => x.Value).Take(3).ToList();
 
         }
 
