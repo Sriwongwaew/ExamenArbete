@@ -111,6 +111,7 @@ namespace Mood.Controllers
                 },
                 new Em
                 {
+                    // Ska likställas med "anger"
                     EmotionName = "contempt",
                     Value = AllEmotion.contempt
                 },
@@ -141,6 +142,7 @@ namespace Mood.Controllers
                 },
                 new Em
                 {
+                    // Ska likställas med "anger"
                     EmotionName = "disgust",
                     Value = AllEmotion.disgust
                 },
