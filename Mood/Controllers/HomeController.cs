@@ -81,6 +81,31 @@ namespace Mood.Controllers
             }
         }
 
+        [HttpPost("UploadPic")]
+        public async Task<IActionResult> PostPic(string pic)
+        {
+            string replaced = pic.Substring(22);
+            var filePath = Path.GetTempFileName();
+            var bytes = Convert.FromBase64String(replaced);
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+
+
+            {
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    byte[] data = Convert.FromBase64String(replaced);
+
+                    bw.Write(data);
+
+                    bw.Close();
+                }
+                
+            }
+            var print = await MakeAnalysisRequest(filePath);
+            return Ok(print);
+
+        }
+
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> Post(IFormFile file)
         {

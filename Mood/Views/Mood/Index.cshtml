@@ -28,25 +28,36 @@
 
 
     @*<form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
-        <div class="form-group">
-            <div class="col-md-10">
-                <p>Upload one or more files using this form:</p>
-                <input type="file" name="file"/>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload one or more files using this form:</p>
+                    <input type="file" name="file"/>
+                </div>
             </div>
-        </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>*@
+
+
+    <form method="post" enctype="multipart/form-data" asp-controller="UploadPic" asp-action="Index" >
+        <div id="test2"></div>
+
+
         <div class="form-group">
             <div class="col-md-10">
                 <input type="submit" value="Upload" />
             </div>
         </div>
-    </form>*@
+    </form>
 
-
-    <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+    @*<form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
         <div class="form-group">
-            <div class="col-md-10" >
+            <div class="col-md-10">
                 <a id="test1"></a>
-                <input id="" type="file" name="file" style="width:20000px;" value=""/>
+                <input id="" type="file" name="file" style="width:20000px;" value="" />
             </div>
         </div>
         <div class="form-group">
@@ -56,7 +67,7 @@
         </div>
     </form>
 
-
+    <input name="pic" type="text"/>*@
 
 </body>
 
@@ -129,12 +140,11 @@
     }
 
     function convertCanvasToImage(canvas) {
-        var url = canvas.toDataURL("image/jpeg");
+        var url = canvas.toDataURL("image/png");
         //document.getElementById("test1").innerHTML = `<img name="file" src="${image.src}" />`;
 
-        var file = dataURItoBlob(url, 'image/png');
 
-        document.getElementById('test1').innerHTML = `<img name="file" src="${file}" />`;
+        document.getElementById('test2').innerHTML = `<input value="${url}" name="pic" type="text"/>`;
 
 
     }
