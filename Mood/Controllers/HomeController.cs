@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mood.Models;
 using Mood.Models.FaceApiData;
@@ -18,6 +19,7 @@ using System.Web;
 
 namespace Mood.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         const string subscriptionKey = "0f02fdf50aa34b43a890cc185515e46f";
@@ -81,6 +83,17 @@ namespace Mood.Controllers
             }
         }
 
+
+
+
+   //gör metod som visar historik för inloggade användare
+        [HttpGet]        
+        public IActionResult ShowHistory ()
+        {
+            return View();
+
+}
+
         [HttpPost("UploadPic")]
         public async Task<IActionResult> PostPic(string pic)
         {
@@ -104,8 +117,7 @@ namespace Mood.Controllers
             var print = await MakeAnalysisRequest(filePath);
             return Ok(print);
 
-        }
-
+        [AllowAnonymous]
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> Post(IFormFile file)
         {
@@ -123,6 +135,7 @@ namespace Mood.Controllers
            
         }
 
+        [AllowAnonymous]
         public PlaylistViewModel ConvertToEmotion(string print)
         {
             var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
@@ -182,6 +195,7 @@ namespace Mood.Controllers
 
         }
 
+        [AllowAnonymous]
         public PlaylistViewModel LinkPlaylistDependingOnEmotion(string emotionResult)
         {
 
@@ -189,8 +203,9 @@ namespace Mood.Controllers
 
             if (emotionResult == "anger" || emotionResult == "contempt" || emotionResult == "disgust")
             {
-                return result;
-
+                result.Playlist1 = $"https://open.spotify.com/embed/user/artkul/playlist/0ybhZEyc8RrHsVDFt9x5CI";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/1239561108/playlist/29EOIjr2saw00KxpYdYSQM";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/dvaughan2021/playlist/5Am1VHtu0oJAc5omSVHvat";
             }
             else if (emotionResult == "happiness")
             {
@@ -200,22 +215,29 @@ namespace Mood.Controllers
             }
             else if (emotionResult == "fear")
             {
-                return result;
+                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6SpcerLn1dx";
+                result.Playlist2 = $"https://open.spotify.com/embed/show/5XhS5WBxLYgN3S9KhEyrrF";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/warnermusicus/playlist/59njg5yJwvLH2vAuaZdAZD";
 
             }
             else if (emotionResult == "sadness")
             {
-                return result;
+                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX3YSRoSdA634";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX7qK8ma5wgG1";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/funnybunny000000/playlist/4EoPt05ztUjVaujcWbUL2Z";
 
             }
             else if (emotionResult == "surprise")
             {
-                return result;
-
+                result.Playlist1 = $"https://open.spotify.com/embed/user/ofinns/playlist/61CPcnHmTVMloD399c76et";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/juandurfelworld/playlist/1SUu5S4mKpyOEeuImxGM64";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWSEMER0I7qzl";
             }
             else if (emotionResult == "neutral")
             {
-                return result;
+                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbITWG1ZJKYt";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWTkxQvqMy4WW";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/foilism/playlist/37qanRa2o6oa2l0TkMNdnD";
             }
 
             return result;
