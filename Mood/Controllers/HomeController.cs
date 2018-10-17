@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mood.Models;
 using Mood.Models.FaceApiData;
@@ -18,6 +19,7 @@ using System.Web;
 
 namespace Mood.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         const string subscriptionKey = "0f02fdf50aa34b43a890cc185515e46f";
@@ -81,6 +83,15 @@ namespace Mood.Controllers
             }
         }
 
+        //gör metod som visar historik för inloggade användare
+        [HttpGet]        
+        public IActionResult ShowHistory ()
+        {
+            return View();
+        }
+
+
+        [AllowAnonymous]
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> Post(IFormFile file)
         {
@@ -98,6 +109,7 @@ namespace Mood.Controllers
            
         }
 
+        [AllowAnonymous]
         public PlaylistViewModel ConvertToEmotion(string print)
         {
             var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
@@ -157,6 +169,7 @@ namespace Mood.Controllers
 
         }
 
+        [AllowAnonymous]
         public PlaylistViewModel LinkPlaylistDependingOnEmotion(string emotionResult)
         {
 
