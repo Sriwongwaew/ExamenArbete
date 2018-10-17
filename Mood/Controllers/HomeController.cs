@@ -190,8 +190,8 @@ namespace Mood.Controllers
             else if (emotionResult == "happiness")
             {
                 result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-                result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX7KNKjOK0o75";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX9XIFQuFvzM4";
             }
             else if (emotionResult == "fear")
             {
