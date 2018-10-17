@@ -5,12 +5,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\main.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.2.0-preview" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0"></DotNetCliToolReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\main.css" />
+    <None Include="wwwroot\img\Arg copy.png" />
+    <None Include="wwwroot\img\Förvånad copy.png" />
+    <None Include="wwwroot\img\Glad copy.png" />
+    <None Include="wwwroot\img\Ledsen copy.png" />
+    <None Include="wwwroot\img\logotypPNG.png" />
+    <None Include="wwwroot\img\Neutral copy.png" />
+    <None Include="wwwroot\img\rädd copy.png" />
+    <None Include="wwwroot\img\smallbubble.png" />
+    <None Include="wwwroot\img\Uttråkat copy.png" />
   </ItemGroup>
   
 </Project>

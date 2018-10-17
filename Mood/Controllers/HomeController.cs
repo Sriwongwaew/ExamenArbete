@@ -19,7 +19,7 @@ using System.Web;
 
 namespace Mood.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         const string subscriptionKey = "0f02fdf50aa34b43a890cc185515e46f";
@@ -112,10 +112,11 @@ namespace Mood.Controllers
 
                     bw.Close();
                 }
-                
+
             }
             var print = await MakeAnalysisRequest(filePath);
             return Ok(print);
+        } 
 
         [AllowAnonymous]
         [HttpPost("UploadFiles")]

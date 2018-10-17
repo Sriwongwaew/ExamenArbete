@@ -12,7 +12,7 @@
     </div>
     <footer>
         @RenderSection("footer", required: false)
-        <vc:greeter></vc:greeter>
+        @*<vc:greeter></vc:greeter>
         @if (User.Identity.IsAuthenticated)
         {
             foreach (var identity in User.Identities)
