@@ -23,10 +23,7 @@ namespace Mood.Controllers
     public class HomeController : Controller
     {
         const string subscriptionKey = "0f02fdf50aa34b43a890cc185515e46f";
-        const string uriBase =
-        "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
-
-        //string print = "";
+        const string uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
 
         public IActionResult Index()
         {
@@ -37,38 +34,28 @@ namespace Mood.Controllers
         {
             HttpClient client = new HttpClient();
 
-            // Request headers.
             client.DefaultRequestHeaders.Add(
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
 
-            // Request parameters. A third optional parameter is "details".
             string requestParameters = "returnFaceId=true&returnFaceLandmarks=false" +
                 "&returnFaceAttributes=age,gender,headPose,smile,facialHair,glasses," +
                 "emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
 
-            // Assemble the URI for the REST API Call.
             string uri = uriBase + "?" + requestParameters;
 
             HttpResponseMessage response;
 
-            // Request body. Posts a locally stored JPEG image.
             byte[] byteData = GetImageAsByteArray(pic);
 
             using (ByteArrayContent content = new ByteArrayContent(byteData))
             {
-                // This example uses content type "application/octet-stream".
-                // The other content types you can use are "application/json"
-                // and "multipart/form-data".
                 content.Headers.ContentType =
                     new MediaTypeHeaderValue("application/octet-stream");
 
-                // Execute the REST API call.
                 response = await client.PostAsync(uri, content);
 
-                // Get the JSON response.
                 string contentString = await response.Content.ReadAsStringAsync();
 
-                // Display the JSON response.
                  return contentString;
             }
         }
@@ -83,25 +70,21 @@ namespace Mood.Controllers
             }
         }
 
-
-
-
-   //gör metod som visar historik för inloggade användare
+        //gör metod som visar historik för inloggade användare
         [HttpGet]        
         public IActionResult ShowHistory ()
         {
             return View();
 
-}
+        }
 
         [HttpPost("UploadPic")]
         public async Task<IActionResult> PostPic(string pic)
         {
             string replaced = pic.Substring(22);
-            var filePath = Path.GetTempFileName();
-            var bytes = Convert.FromBase64String(replaced);
+            string filePath = Path.GetTempFileName();
+            byte[] bytes = Convert.FromBase64String(replaced);
             using (FileStream fs = new FileStream(filePath, FileMode.Create))
-
 
             {
                 using (BinaryWriter bw = new BinaryWriter(fs))
@@ -122,7 +105,6 @@ namespace Mood.Controllers
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> Post(IFormFile file)
         {
-
             var filePath = Path.GetTempFileName();
 
             using (var stream = new FileStream(filePath, FileMode.Create))
@@ -132,8 +114,7 @@ namespace Mood.Controllers
 
             var print = await MakeAnalysisRequest(filePath);
 
-            return View("Result", ConvertToEmotion(print));
-           
+            return View("Result", ConvertToEmotion(print));         
         }
 
         [AllowAnonymous]
@@ -152,7 +133,6 @@ namespace Mood.Controllers
                 },
                 new Em
                 {
-                    // Ska likställas med "anger"
                     EmotionName = "contempt",
                     Value = AllEmotion.contempt
                 },
@@ -183,15 +163,14 @@ namespace Mood.Controllers
                 },
                 new Em
                 {
-                    // Ska likställas med "anger"
                     EmotionName = "disgust",
                     Value = AllEmotion.disgust
                 },
             };
 
             var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
-            string result = primaryEmotion.EmotionName;
-            PlaylistViewModel Playlist = LinkPlaylistDependingOnEmotion(result);
+            string emotionResult = primaryEmotion.EmotionName;
+            PlaylistViewModel Playlist = LinkPlaylistDependingOnEmotion(emotionResult);
             return Playlist;
 
         }
