@@ -98,7 +98,7 @@ namespace Mood.Controllers
 
             }
             var print = await MakeAnalysisRequest(filePath);
-            return Ok(print);
+            return View("Result", ConvertToEmotion(print));
         } 
 
         [AllowAnonymous]

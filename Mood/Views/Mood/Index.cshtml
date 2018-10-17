@@ -13,7 +13,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="init();">
 <!--MENY NAVBAR-->
 
 <nav class="navbar navbar-expand navbarBlue ">
@@ -56,7 +56,7 @@
         <div id="CameraButtons">
 
             @*WEBCAM*@
-            <div onload="init();">
+            <div >
                 <p>Take a snapshot of the current video stream</p>
                 Click on the Start WebCam button.
                 <p>
@@ -104,7 +104,6 @@
             </div>
 
         </div>
-    </div>
     </div>
 
 
