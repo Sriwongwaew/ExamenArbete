@@ -68,21 +68,17 @@
         <div id="CameraButtons">
 
             @*WEBCAM*@
-            <div >
-                <p>Take a snapshot of the current video stream</p>
-                Click on the Start WebCam button.
-                <p>
-                    <button onclick="startWebcam();">Start WebCam</button>
-                    <button onclick="snapshot();">Take Snapshot</button>
+            
+                    <br /><button class="btn btnGrey" onclick="startWebcam();">Start WebCam</button>
+                    <button class="btn btnGrey" onclick="snapshot();">Take Snapshot</button>
                 </p>
                 <video onclick="snapshot(this);" width=400 height=400 id="video" controls autoplay></video>
                 <p>
 
-                    Screenshots :
-                <p>
-                    <canvas id="myCanvas" width="400" height="300"></canvas>
-
-                </p>
+                  
+                    <div id="MinCanvaso" class="wrapper">
+                        <canvas id="myCanvas" width="400" height="300"></canvas>
+                    </div>
 
                 @*TEST2*@
 
@@ -92,7 +88,7 @@
 
                     <div class="form-group">
                         <div class="col-md-10">
-                            <input type="submit" value="Upload" />
+                            <input class="btn btnGrey" type="submit" value="Upload" />
                         </div>
                     </div>
                 </form>
@@ -100,14 +96,13 @@
                 @*TEST1*@
                 <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
                     <div class="form-group">
-                        <div class="col-md-10">
-                            <p>Upload one or more files using this form:</p>
-                            <input type="file" name="file" />
+                        <div  class="col-md-10">
+                            <input class="btn btnGrey" type="file" name="file" />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-10">
-                            <input type="submit" value="Upload" />
+                            <input class="btn btnGrey" type="submit" value="Upload" />
                         </div>
                     </div>
                 </form>
@@ -116,7 +111,7 @@
 
         </div>
     </div>
-    </div>
+    
 
     <p style="color: #212121">Rip lilla knappen 4ever i våra minnen</p>
 

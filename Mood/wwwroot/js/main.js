@@ -1,4 +1,5 @@
-﻿
+﻿let MinCanvaso = document.getElementById("MinCanvaso");
+MinCanvaso.style.display = "none";
 
 let CameraButtons = document.getElementById("CameraButtons");
 CameraButtons.style.display = "none";
@@ -69,6 +70,7 @@ function init() {
 }
 
 function snapshot() {
+    MinCanvaso.style.display = "block";
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     let pic = document.getElementById("myCanvas");
     var url = pic.toDataURL("image/png");
