@@ -198,9 +198,6 @@ namespace Mood.Controllers
                 result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
                 result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
                 result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-                return result;
-
-
             }
             else if (emotionResult == "fear")
             {
