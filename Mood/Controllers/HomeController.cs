@@ -235,11 +235,11 @@ namespace Mood.Controllers
 
 
             }
-            else
-            {
+            
+            
                 return result;
 
-            }
+            
 
         }
     }
