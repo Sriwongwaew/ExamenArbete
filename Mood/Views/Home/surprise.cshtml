@@ -14,7 +14,7 @@
     <!--MENY NAVBAR-->
 
     <nav class="navbar navbar-expand navbarBlue ">
-        <a style="width: 160px;" href="https://localhost:44361/Mood"><img class="navbar-brand" src="~/img/logotypPNG.png" width="100%" /></a>
+        <a style="width: 160px;" href="https://localhost:44361/Mood"><img class="navbar-brand" src="~/img/logotypPNG.png" style="width:100%;" /></a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,45 +35,50 @@
                 <img src="~/img/Förvånad copy.png" style="width: 20%; margin-top: 30px;" />
                 <h1 style="font-size: 200px;">Du är i chock</h1>
             </div>
-            <div style="float:right;">
-                <h1 style="font-size: 50px;">Varför sluta där<br />här är en spellista full av överraskningar</h1>
-                <!--COLLAPSE MENY MED ALTERNATIVA SPELLISTOR-->
-                <p>
-                    <button class="btn btnGrey" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width: 200px;">
-                        Inte nöjd med spellistan?
-                    </button>
-                </p>
-                <div class="collapse" id="collapseExample">
-                    <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body" style="background-color: #2E2E2E; color: #458CCC; font-size: 20px; width: 650px;">
-                            <div>
-                                <a id="CollapseOneTextHeader">Andra alternativ </a>
-                                <p>Är du inte nöjd med din spellista  rekomenderar vi även dessa två</p>
-                            </div>
-                            <iframe src="@Model.Playlist2" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                            <iframe src="@Model.Playlist3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
-                        </div>
-                    </div>
+            <div class="row">
+                <!--VISA SPELLISTA-->
 
-                    <!--KNAPP TILLBAKA-->
-
+                <div class="col-5" style="padding-left: 100px;">
+                    <iframe src="@Model.Playlist1" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                 </div>
-                <a href="https://localhost:44361/Mood" class="Info nav-item active nav-link">< Tillbaka</a>
+                
+                <div class="col-7">
+                    <h1 style="font-size: 50px;">Varför sluta där<br />här är en spellista full av överraskningar</h1>
+                    <!--COLLAPSE MENY MED ALTERNATIVA SPELLISTOR-->
+
+                    <p>
+                        <button class="btn btnGrey" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width: 200px; color: white">
+                            Inte nöjd med spellistan?
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body" style="background-color: #2E2E2E; color: #458CCC; font-size: 20px; width: 650px;">
+                                <div>
+                                    <a id="CollapseOneTextHeader">Andra alternativ </a>
+                                    <p>Är du inte nöjd med din spellista  rekomenderar vi även dessa två</p>
+                                </div>
+                                <iframe src="@Model.Playlist2" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                <iframe src="@Model.Playlist3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+                            </div>
+                        </div>
+                        
+
+                        <!--KNAPP TILLBAKA-->
+
+                    </div>
+                    <a href="https://localhost:44361/Mood" class="Info nav-item active nav-link">< Tillbaka</a>
+                </div>
+
+
+
+
+
             </div>
 
-            <!--VISA SPELLISTA-->
 
-            <div style=" float: left; padding-left: 120px;">
-                <iframe src="@Model.Playlist1" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-            </div>
-
-
-
-        </div>
-
-
-        <link rel="stylesheet" href="~/css/main.css" />
+            <link rel="stylesheet" href="~/css/main.css" />
 
 </body>
