@@ -98,7 +98,9 @@ namespace Mood.Controllers
 
             }
             var print = await MakeAnalysisRequest(filePath);
-            return View("Result", ConvertToEmotion(print));
+            string emotionResult = ConvertToEmotion(print);
+            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
+            return View(emotionResult, playlist);
         } 
 
         [AllowAnonymous]
@@ -114,11 +116,14 @@ namespace Mood.Controllers
 
             var print = await MakeAnalysisRequest(filePath);
 
-            return View("Result", ConvertToEmotion(print));         
+            string emotionResult = ConvertToEmotion(print);
+            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
+            return View(emotionResult, playlist);
+
         }
 
         [AllowAnonymous]
-        public PlaylistViewModel ConvertToEmotion(string print)
+        public string ConvertToEmotion(string print)
         {
             var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
 
@@ -170,8 +175,8 @@ namespace Mood.Controllers
 
             var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
             string emotionResult = primaryEmotion.EmotionName;
-            PlaylistViewModel Playlist = LinkPlaylistDependingOnEmotion(emotionResult);
-            return Playlist;
+            return emotionResult;
+            
 
         }
 
@@ -186,18 +191,24 @@ namespace Mood.Controllers
                 result.Playlist1 = $"https://open.spotify.com/embed/user/artkul/playlist/0ybhZEyc8RrHsVDFt9x5CI";
                 result.Playlist2 = $"https://open.spotify.com/embed/user/1239561108/playlist/29EOIjr2saw00KxpYdYSQM";
                 result.Playlist3 = $"https://open.spotify.com/embed/user/dvaughan2021/playlist/5Am1VHtu0oJAc5omSVHvat";
+                return result;
             }
             else if (emotionResult == "happiness")
             {
                 result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
                 result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
                 result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+                return result;
+
+
             }
             else if (emotionResult == "fear")
             {
                 result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6SpcerLn1dx";
                 result.Playlist2 = $"https://open.spotify.com/embed/show/5XhS5WBxLYgN3S9KhEyrrF";
                 result.Playlist3 = $"https://open.spotify.com/embed/user/warnermusicus/playlist/59njg5yJwvLH2vAuaZdAZD";
+                return result;
+
 
             }
             else if (emotionResult == "sadness")
@@ -205,6 +216,8 @@ namespace Mood.Controllers
                 result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX3YSRoSdA634";
                 result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX7qK8ma5wgG1";
                 result.Playlist3 = $"https://open.spotify.com/embed/user/funnybunny000000/playlist/4EoPt05ztUjVaujcWbUL2Z";
+                return result;
+
 
             }
             else if (emotionResult == "surprise")
@@ -212,15 +225,25 @@ namespace Mood.Controllers
                 result.Playlist1 = $"https://open.spotify.com/embed/user/ofinns/playlist/61CPcnHmTVMloD399c76et";
                 result.Playlist2 = $"https://open.spotify.com/embed/user/juandurfelworld/playlist/1SUu5S4mKpyOEeuImxGM64";
                 result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWSEMER0I7qzl";
+                return result;
+
+
             }
             else if (emotionResult == "neutral")
             {
                 result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbITWG1ZJKYt";
                 result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWTkxQvqMy4WW";
                 result.Playlist3 = $"https://open.spotify.com/embed/user/foilism/playlist/37qanRa2o6oa2l0TkMNdnD";
+                return result;
+
+
+            }
+            else
+            {
+                return result;
+
             }
 
-            return result;
         }
     }
 }
