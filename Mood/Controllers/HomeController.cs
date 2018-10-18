@@ -30,6 +30,12 @@ namespace Mood.Controllers
             return RedirectToAction("Index", "Mood");
         }
 
+        public IActionResult Kalle(string emotion)
+        {
+            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotion);
+            return View(emotion, playlist);
+        }
+
         static async Task<string> MakeAnalysisRequest(string pic)
         {
             HttpClient client = new HttpClient();
