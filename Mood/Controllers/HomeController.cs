@@ -207,8 +207,8 @@ namespace Mood.Controllers
             }
             else if (emotionResult == "fear")
             {
-                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6SpcerLn1dx";
-                result.Playlist2 = $"https://open.spotify.com/embed/show/5XhS5WBxLYgN3S9KhEyrrF";
+                result.Playlist1 = $"https://open.spotify.com/embed/show/5XhS5WBxLYgN3S9KhEyrrF";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6SpcerLn1dx";
                 result.Playlist3 = $"https://open.spotify.com/embed/user/warnermusicus/playlist/59njg5yJwvLH2vAuaZdAZD";
                 return result;
 
