@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\anger.cshtml" />
     <Content Remove="wwwroot\css\main.css" />
   </ItemGroup>
 
@@ -18,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Home\anger.cshtml" />
     <None Include="wwwroot\css\main.css" />
     <None Include="wwwroot\img\Arg copy.png" />
     <None Include="wwwroot\img\Förvånad copy.png" />
@@ -28,6 +30,14 @@
     <None Include="wwwroot\img\rädd copy.png" />
     <None Include="wwwroot\img\smallbubble.png" />
     <None Include="wwwroot\img\Uttråkat copy.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\anger.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\anger.cshtml" />
   </ItemGroup>
   
 </Project>
