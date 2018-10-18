@@ -39,48 +39,38 @@
                 <h1 style="font-size: 50px;">Här är en spellista <br />som triggar din inre hulligan...</h1>
                 <!--COLLAPSE MENY MED ALTERNATIVA SPELLISTOR-->
 
-                <div class="accordion" id="accordionExample" style="padding-top: 50px; width: 690px; padding-bottom: 15px; ">
-                    <div class="card">
-                        <div class="card-header" id="headingTwo" style="background-color: #585858; border-color: #585858; ">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: white; font-size: 18px;">
-                                    Inte nöjd med ditt val av spellista?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body" style="background-color: #2E2E2E; color: #458CCC; font-size: 20px;">
-                                <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body" style="background-color: #2E2E2E; color: #458CCC; font-size: 20px;">
-                                        <div>
-                                            <a id="CollapseOneTextHeader">Andra alternativ </a>
-                                            <p>Är du inte nöjd med din spellista  rekomenderar vi även dessa två</p>
-                                        </div>
-                                        <iframe src="@Model.Playlist2" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                        <iframe src="@Model.Playlist3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-                                    </div>
-                                </div>
+                <p>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width: 200px; background-color: #585858; border-color: #585858;">
+                        Inte nöjd med spellistan?
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body" style="background-color: #2E2E2E; color: #458CCC; font-size: 20px; width: 650px;">
+                            <div>
+                                <a id="CollapseOneTextHeader">Andra alternativ </a>
+                                <p>Är du inte nöjd med din spellista  rekomenderar vi även dessa två</p>
                             </div>
+                            <iframe src="@Model.Playlist2" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            <iframe src="@Model.Playlist3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
                         </div>
                     </div>
 
+                    <!--KNAPP TILLBAKA-->
+                    <a href="" class="Info nav-item active nav-link">< Tillbaka</a>
                 </div>
 
-                <!--KNAPP TILLBAKA-->
-                <a href="" class="Info nav-item active nav-link">< Tillbaka</a>
+                <!--VISA SPELLISTA-->
+
+                <div style=" float: left; padding-left: 30px;">
+                    <iframe src="@Model.Playlist1" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+                </div>
+
+
+
             </div>
-
-            <!--VISA SPELLISTA-->
-
-            <div style=" float: left; padding-left: 30px;">
-                <iframe src="@Model.Playlist1" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-            </div>
-
-
-
-        </div>
 
 
         <link rel="stylesheet" href="~/css/main.css" />
