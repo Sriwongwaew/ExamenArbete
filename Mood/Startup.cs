@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Routing;
-using Mood.Services;
 using Mood.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Rewrite;
@@ -40,17 +39,15 @@ namespace Mood
 
             // Registera dina tjänster
 
-            services.AddSingleton<IGreeter, Greeter>();
-            services.AddScoped<IMoodService, MoodService>();
-            services.AddScoped<IHttpService, HttpService>();
+
             services.AddDbContext<MoodDbContext>(
                 options => options.UseSqlServer(_configuration.GetConnectionString("Mood")));
-            services.AddScoped<IMoodData, SqlMoodData>();
+
             //services.AddScoped<IMoodData, InMemoryRestaurantData>();
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IGreeter greeter, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {               

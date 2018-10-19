@@ -14,7 +14,7 @@
     <!--MENY NAVBAR-->
 
     <nav class="navbar navbar-expand navbarBlue ">
-        <a style="width: 160px;" href="https://localhost:44361/Mood"><img class="navbar-brand" src="~/img/logotypPNG.png" width="100%" /></a>
+        <a asp-action="Index" style="width: 160px;"><img class="navbar-brand" src="~/img/logotypPNG.png" width="100%" /></a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -64,7 +64,7 @@
                     </div>
 
                     <!--KNAPP TILLBAKA-->
-                    <a href="https://localhost:44361/Mood" class="Info nav-item active nav-link">< Tillbaka</a>
+                    <a asp-action="Index" class="Info nav-item active nav-link">< Tillbaka</a>
                 </div>
 
                 <!--VISA SPELLISTA-->
