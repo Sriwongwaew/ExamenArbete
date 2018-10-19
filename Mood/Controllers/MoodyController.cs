@@ -27,7 +27,7 @@ namespace Mood.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Mood");
+            return View();
         }
 
         public IActionResult Kalle(string emotion)
