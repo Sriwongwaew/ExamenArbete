@@ -16,6 +16,7 @@ UploadPicButtons.style.display = "none";
 function ShowOptions() {
     if (ChoosePicMethod.style.display === "none") {
         ChoosePicMethod.style.display = "block";
+        TalkBubble.style.display = "none";
     } else {
         ChoosePicMethod.style.display = "none";
         CameraButtons.style.display = "none"
@@ -27,6 +28,7 @@ function ShowUploadPic() {
     if (UploadPicButtons.style.display === "none") {
         UploadPicButtons.style.display = "block";
         CameraButtons.style.display = "none";
+        TalkBubble.style.display = "none";
     } else {
         UploadPicButtons.style.display = "none";
     }
@@ -49,6 +51,7 @@ function ShowEmoji() {
     if (TalkBubble.style.display === "none") {
         TalkBubble.style.display = "block";
         CameraButtons.style.display = "none";
+        ChoosePicMethod.style.display = "none";
     } else {
         TalkBubble.style.display = "none";
     }
