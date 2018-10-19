@@ -81,7 +81,7 @@ namespace Mood
 
             // /Home/Index/4
 
-            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
+            routeBuilder.MapRoute("Default", "{controller=home}/{action=index}/{id?}");
         }
     }
 }
