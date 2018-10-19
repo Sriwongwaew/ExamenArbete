@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:44361/Mood",
+      "applicationUrl": "https://localhost:44361/",
       "sslPort": 44361
     }
   },

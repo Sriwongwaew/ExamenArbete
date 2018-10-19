@@ -20,7 +20,7 @@ using System.Web;
 namespace Mood.Controllers
 {
     //[Authorize]
-    public class MoodController : Controller
+    public class MoodyController : Controller
     {
         const string subscriptionKey = "0f02fdf50aa34b43a890cc185515e46f";
         const string uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
