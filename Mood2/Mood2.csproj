@@ -34,7 +34,7 @@
     <Content Update="Views\Moody\surprise.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Shared\_Layout.cshtml">
+    <Content Update="Views\Shared\_LayoutMood.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\_ViewImports.cshtml">

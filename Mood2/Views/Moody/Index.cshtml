@@ -2,7 +2,9 @@
 @{
     ViewBag.Title = "Home page";
 }
-
+@{
+    Layout = "_LayoutMood";
+}
 
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -13,104 +15,104 @@
 </head>
 
 <body onload="init();">
-<!--MENY NAVBAR-->
+    <!--MENY NAVBAR-->
 
-<nav class="navbar navbar-expand navbarBlue ">
-    <a style="width: 160px;" asp-action="Index"><img class="navbar-brand" src="~/img/logotypPNG.png"  style="width:100%" /></a>
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li style="padding-left: 40px;" href="https://localhost:44376/Mood/Info.html" class="Info nav-item active nav-link">Info</li>
-
-        </ul>
-        <img src="~/img/userICon.png" style="width:5%; margin-left: 800px;" />
-    </div>
-</nav>
-
-<div class="container">
-
-    <div class="wrapper">
-        <br /><br /><h1>Hur mår du idag?</h1>
-        @*EMOJI KNAPP*@
-        <button class="btn btn-primary" onclick="ShowEmoji()">
-            <img class="btnIcon" src="~/img/Neutral copy.png" />
+    <nav class="navbar navbar-expand navbarBlue ">
+        <a style="width: 160px;" asp-action="Index"><img class="navbar-brand" src="~/img/logotypPNG.png" style="width:100%" /></a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li style="padding-left: 40px;" href="https://localhost:44376/Mood/Info.html" class="Info nav-item active nav-link">Info</li>
 
-        @*KAMERA KNAPP*@
-        <button class="btn btn-primary"><img class="btnIcon" onclick="ShowCamera()" src="~/img/cameraIconWhite.png" /></button>
-
-        @*DISPLAY ALLA EMOJIS*@
-        <div id="TalkBubble">
-            <br /><br /><br />
-            <a  asp-action="Kalle" asp-route-emotion="happiness">
-                <img class="emojiBtn" src="~/img/Glad copy.png" />
-            </a>
-            <a asp-action="Kalle" asp-route-emotion="anger">
-                <img class="emojiBtn" src="~/img/Arg copy.png" />
-            </a>
-            <a  asp-action="Kalle" asp-route-emotion="sadness">
-                <img class="emojiBtn" src="~/img/Ledsen copy.png" onclick="" />
-            </a><br /><br />
-            <a asp-action="Kalle" asp-route-emotion="surprise">
-                <img class="emojiBtn" src="~/img/Förvånad copy.png" onclick="" />
-            </a>
-            <a asp-action="Kalle" asp-route-emotion="fear">
-                <img class="emojiBtn" src="~/img/rädd copy.png" onclick="" />
-            </a>
-            <a asp-action="Kalle" asp-route-emotion="neutral">
-                <img class="emojiBtn" src="~/img/Uttråkat copy.png" onclick="" />
-            </a>    
+            </ul>
+            <img src="~/img/userICon.png" style="width:5%; margin-left: 800px;" />
         </div>
+    </nav>
 
-        <div id="CameraButtons">
+    <div class="container">
 
-            @*WEBCAM*@
-            
-                    <br /><button class="btn btnGrey" onclick="startWebcam();">Start WebCam</button>
-                    <button class="btn btnGrey" onclick="snapshot();">Take Snapshot</button>
+        <div class="wrapper">
+            <br /><br /><h1>Hur mår du idag?</h1>
+            @*EMOJI KNAPP*@
+            <button class="btn btn-primary" onclick="ShowEmoji()">
+                <img class="btnIcon" src="~/img/Neutral copy.png" />
+            </button>
+
+            @*KAMERA KNAPP*@
+            <button class="btn btn-primary"><img class="btnIcon" onclick="ShowCamera()" src="~/img/cameraIconWhite.png" /></button>
+
+            @*DISPLAY ALLA EMOJIS*@
+            <div id="TalkBubble">
+                <br /><br /><br />
+                <a asp-action="Kalle" asp-route-emotion="happiness">
+                    <img class="emojiBtn" src="~/img/Glad copy.png" />
+                </a>
+                <a asp-action="Kalle" asp-route-emotion="anger">
+                    <img class="emojiBtn" src="~/img/Arg copy.png" />
+                </a>
+                <a asp-action="Kalle" asp-route-emotion="sadness">
+                    <img class="emojiBtn" src="~/img/Ledsen copy.png" onclick="" />
+                </a><br /><br />
+                <a asp-action="Kalle" asp-route-emotion="surprise">
+                    <img class="emojiBtn" src="~/img/Förvånad copy.png" onclick="" />
+                </a>
+                <a asp-action="Kalle" asp-route-emotion="fear">
+                    <img class="emojiBtn" src="~/img/rädd copy.png" onclick="" />
+                </a>
+                <a asp-action="Kalle" asp-route-emotion="neutral">
+                    <img class="emojiBtn" src="~/img/Uttråkat copy.png" onclick="" />
+                </a>
+            </div>
+
+            <div id="CameraButtons">
+
+                @*WEBCAM*@
+
+                <br /><button class="btn btnGrey" onclick="startWebcam();">Start WebCam</button>
+                <button class="btn btnGrey" onclick="snapshot();">Take Snapshot</button>
                 </p>
                 <video onclick="snapshot(this);" width=400 height=400 id="video" controls autoplay></video>
                 <p>
 
-                  
+
                     <div id="MinCanvaso" class="wrapper">
                         <canvas id="myCanvas" width="400" height="300"></canvas>
                     </div>
 
-                @*TEST2*@
+                    @*TEST2*@
 
-                <form method="post" enctype="multipart/form-data" asp-controller="UploadPic" asp-action="Index">
-                    <div id="test2"></div>
+                    <form method="post" enctype="multipart/form-data" asp-controller="UploadPic" asp-action="Index">
+                        <div id="test2"></div>
 
 
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <input class="btn btnGrey" type="submit" value="Upload" />
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input class="btn btnGrey" type="submit" value="Upload" />
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-                @*TEST1*@
-                <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
-                    <div class="form-group">
-                        <div  class="col-md-10">
-                            <input class="btn btnGrey" type="file" name="file" />
+                    @*TEST1*@
+                    <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input class="btn btnGrey" type="file" name="file" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <input class="btn btnGrey" type="submit" value="Upload" />
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input class="btn btnGrey" type="submit" value="Upload" />
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
             </div>
 
         </div>
     </div>
-    
+
 
     <p style="color: #212121">Rip lilla knappen 4ever i våra minnen</p>
 
@@ -124,4 +126,4 @@
 
 
 
-    <script src="~/js/main.js"></script>
+<script src="~/js/main.js"></script>
