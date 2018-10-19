@@ -1,4 +1,4 @@
-ï»¿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mood.Models;
@@ -76,7 +76,7 @@ namespace Mood.Controllers
             }
         }
 
-        //gÃ¶r metod som visar historik fÃ¶r inloggade anvÃ¤ndare
+        //gör metod som visar historik för inloggade användare
         [HttpGet]        
         public IActionResult ShowHistory ()
         {
