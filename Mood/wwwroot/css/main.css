@@ -5,7 +5,12 @@
 .btnGrey {
     background-color: #585858;
     border-color: #585858;
+    color: white;
     
+}
+
+#UploadPicButtons {
+    padding-left: 180px;
 }
 
 @font-face {

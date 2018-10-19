@@ -12,8 +12,8 @@ namespace Mood.Controllers
 
         public IActionResult Index()
         {
-           return RedirectToAction("Index", "Moody");
+            return RedirectToAction("Index", "Moody");
         }
-
     }
 }
+

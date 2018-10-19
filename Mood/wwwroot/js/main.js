@@ -7,11 +7,37 @@ CameraButtons.style.display = "none";
 let TalkBubble = document.getElementById("TalkBubble");
 TalkBubble.style.display = "none";
 
+let ChoosePicMethod = document.getElementById("ChoosePicMethod");
+ChoosePicMethod.style.display = "none";
+
+let UploadPicButtons = document.getElementById("UploadPicButtons");
+UploadPicButtons.style.display = "none";
+
+function ShowOptions() {
+    if (ChoosePicMethod.style.display === "none") {
+        ChoosePicMethod.style.display = "block";
+    } else {
+        ChoosePicMethod.style.display = "none";
+        CameraButtons.style.display = "none"
+        UploadPicButtons.style.display = "none"
+    }
+}
+
+function ShowUploadPic() {
+    if (UploadPicButtons.style.display === "none") {
+        UploadPicButtons.style.display = "block";
+        CameraButtons.style.display = "none";
+    } else {
+        UploadPicButtons.style.display = "none";
+    }
+}
+
 function ShowCamera() {
 
     if (CameraButtons.style.display === "none") {
         CameraButtons.style.display = "block";
         TalkBubble.style.display = "none";
+        UploadPicButtons.style.display = "none"
     } else {
         CameraButtons.style.display = "none";
     }
