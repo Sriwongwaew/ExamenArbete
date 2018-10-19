@@ -8,7 +8,7 @@ using Mood2.Models;
 
 namespace Mood2.Controllers
 {
-    public class HomeController : Controller
+    public class Home2Controller : Controller
     {
         public IActionResult Index()
         {
