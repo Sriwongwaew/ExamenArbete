@@ -1,113 +1,253 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Mood.Models;
-using Mood.Services;
+using Mood.Models.FaceApiData;
 using Mood.ViewModels;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace Mood.Controllers
 {
     //[Authorize]
     public class MoodController : Controller
     {
-        private IMoodData _moodData;
-        private IGreeter _greeter;
-        private readonly IMoodService _moodService;
-        private readonly IHttpService _httpService;
+        const string subscriptionKey = "0f02fdf50aa34b43a890cc185515e46f";
+        const string uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
 
-        public MoodController(IMoodData moodData, IGreeter greeter, IMoodService moodService, IHttpService httpService)
-        {
-            _moodData = moodData;
-            _greeter = greeter;
-            _moodService = moodService;
-            _httpService = httpService;
-        }
-
-        //[AllowAnonymous]
         public IActionResult Index()
         {
-            var model = new IndexViewModel();
-            model.Mood = _moodData.GetAll();
-            model.Hello = _greeter.GetTime();
-            model.SomeCountMessage = _moodService.CountMessage();
-            model.SomethingFromGoogle =  _httpService.Get("http://www.google.com").Result.Substring(0,100);
-            return View(model);
+            return RedirectToAction("Index", "Mood");
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Kalle(string emotion)
         {
-            var model = _moodData.Get(id);
-            if(model == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            return View(model);
+            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotion);
+            return View(emotion, playlist);
         }
 
-        [HttpGet]   
-        public IActionResult Create()
-        {            
+        static async Task<string> MakeAnalysisRequest(string pic)
+        {
+            HttpClient client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add(
+                "Ocp-Apim-Subscription-Key", subscriptionKey);
+
+            string requestParameters = "returnFaceId=true&returnFaceLandmarks=false" +
+                "&returnFaceAttributes=age,gender,headPose,smile,facialHair,glasses," +
+                "emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
+
+            string uri = uriBase + "?" + requestParameters;
+
+            HttpResponseMessage response;
+
+            byte[] byteData = GetImageAsByteArray(pic);
+
+            using (ByteArrayContent content = new ByteArrayContent(byteData))
+            {
+                content.Headers.ContentType =
+                    new MediaTypeHeaderValue("application/octet-stream");
+
+                response = await client.PostAsync(uri, content);
+
+                string contentString = await response.Content.ReadAsStringAsync();
+
+                 return contentString;
+            }
+        }
+
+        static byte[] GetImageAsByteArray(string pic)
+        {
+            using (FileStream fileStream =
+                new FileStream(pic, FileMode.Open, FileAccess.Read))
+            {
+                BinaryReader binaryReader = new BinaryReader(fileStream);
+                return binaryReader.ReadBytes((int)fileStream.Length);
+            }
+        }
+
+        //gör metod som visar historik för inloggade användare
+        [HttpGet]        
+        public IActionResult ShowHistory ()
+        {
             return View();
+
         }
 
-
-        public IActionResult Edit(int id)
+        [HttpPost("UploadPic")]
+        public async Task<IActionResult> PostPic(string pic)
         {
-            var model = _moodData.Get(id);
-            if (model == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            return View(model);
-        }
+            string replaced = pic.Substring(22);
+            string filePath = Path.GetTempFileName();
+            byte[] bytes = Convert.FromBase64String(replaced);
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(OdeToMood mood)
+            {
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    byte[] data = Convert.FromBase64String(replaced);
+
+                    bw.Write(data);
+
+                    bw.Close();
+                }
+
+            }
+            var print = await MakeAnalysisRequest(filePath);
+            string emotionResult = ConvertToEmotion(print);
+            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
+            return View(emotionResult, playlist);
+        } 
+
+        [AllowAnonymous]
+        [HttpPost("UploadFiles")]
+        public async Task<IActionResult> Post(IFormFile file)
         {
-            if (ModelState.IsValid)
+            var filePath = Path.GetTempFileName();
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                _moodData.Update(mood);
-                return RedirectToAction("Details", new { id = mood.Id });
+                await file.CopyToAsync(stream);
             }
-            else
-            {
-                return View();
-            }
+
+            var print = await MakeAnalysisRequest(filePath);
+
+            string emotionResult = ConvertToEmotion(print);
+            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
+            return View(emotionResult, playlist);
+
         }
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(EditViewModel model)
+        [AllowAnonymous]
+        public string ConvertToEmotion(string print)
         {
-            if (ModelState.IsValid)
-            {
-                var newMood = new Models.OdeToMood();
-                newMood.Name = model.Name;
+            var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
 
-                newMood = _moodData.Add(newMood);
+            Emotion AllEmotion = emotions[0].faceAttributes.emotion;
 
-                return RedirectToAction(nameof(Details), new { id = newMood.Id });
-            }
-            else
+            var list = new List<Em>
             {
-                return View();
-            }
+                new Em
+                {
+                    EmotionName = "anger",
+                    Value = AllEmotion.anger
+                },
+                new Em
+                {
+                    EmotionName = "contempt",
+                    Value = AllEmotion.contempt
+                },
+                new Em
+                {
+                    EmotionName = "happiness",
+                    Value = AllEmotion.happiness
+                },
+                new Em
+                {
+                    EmotionName = "fear",
+                    Value = AllEmotion.fear
+                },
+                new Em
+                {
+                    EmotionName = "sadness",
+                    Value = AllEmotion.sadness
+                },
+                new Em
+                {
+                    EmotionName = "surprise",
+                    Value = AllEmotion.surprise
+                },
+                new Em
+                {
+                    EmotionName = "neutral",
+                    Value = AllEmotion.neutral
+                },
+                new Em
+                {
+                    EmotionName = "disgust",
+                    Value = AllEmotion.disgust
+                },
+            };
+
+            var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
+            string emotionResult = primaryEmotion.EmotionName;
+            return emotionResult;
+            
+
         }
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        [AllowAnonymous]
+        public PlaylistViewModel LinkPlaylistDependingOnEmotion(string emotionResult)
         {
-            if (ModelState.IsValid)
+
+            PlaylistViewModel result = new PlaylistViewModel();
+
+            if (emotionResult == "anger" || emotionResult == "contempt" || emotionResult == "disgust")
             {
-                _moodData.Remove(id);
-                return RedirectToAction("Index");
+                result.Playlist1 = $"https://open.spotify.com/embed/user/artkul/playlist/0ybhZEyc8RrHsVDFt9x5CI";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/1239561108/playlist/29EOIjr2saw00KxpYdYSQM";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/dvaughan2021/playlist/5Am1VHtu0oJAc5omSVHvat";
+                return result;
+            }
+            else if (emotionResult == "happiness")
+            {
+                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+            }
+            else if (emotionResult == "fear")
+            {
+                result.Playlist1 = $"https://open.spotify.com/embed/show/5XhS5WBxLYgN3S9KhEyrrF";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6SpcerLn1dx";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/warnermusicus/playlist/59njg5yJwvLH2vAuaZdAZD";
+                return result;
+
 
             }
+            else if (emotionResult == "sadness")
+            {
+                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX3YSRoSdA634";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX7qK8ma5wgG1";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/funnybunny000000/playlist/4EoPt05ztUjVaujcWbUL2Z";
+                return result;
 
-            return RedirectToAction("Edit");
+
+            }
+            else if (emotionResult == "surprise")
+            {
+                result.Playlist1 = $"https://open.spotify.com/embed/user/ofinns/playlist/61CPcnHmTVMloD399c76et";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/juandurfelworld/playlist/1SUu5S4mKpyOEeuImxGM64";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWSEMER0I7qzl";
+                return result;
+
+
+            }
+            else if (emotionResult == "neutral")
+            {
+                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbITWG1ZJKYt";
+                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWTkxQvqMy4WW";
+                result.Playlist3 = $"https://open.spotify.com/embed/user/foilism/playlist/37qanRa2o6oa2l0TkMNdnD";
+                return result;
+
+
+            }
+            
+            
+                return result;
+
+            
+
         }
-
     }
 }
+
