@@ -7,25 +7,10 @@
 }
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body onload="init();">
     <!--MENY NAVBAR-->
-    <nav class="navbar navbar-expand navbarBlue ">
-        <a style="width: 220px;" href="https://localhost:44376/Mood/startsida.html"><img class="navbar-brand" src="~/img/NyLoggaIgen.png" style="width:100%" /></a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li style="padding-left: 40px;" href="https://localhost:44376/Mood/Info.html" class="Info nav-item active nav-link">Info</li>
-            </ul>
-            <img src="~/img/userICon.png" style="width:5%; margin-left: 800px;" />
-        </div>
-    </nav>
+   
     <div class="container">
         <div class="wrapper">
             <br /><br /><h1>Hur mår du idag?</h1>
@@ -79,7 +64,7 @@
                         <div id="test2"></div>
 
                         <div class="form-group">
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input class="btn btnGrey" type="submit" value="Upload" />
                             </div>
                         </div>
@@ -90,8 +75,8 @@
                 <br />
                 <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
                     <div class="form-group">
-                        <div class="col-md-10">
-                            <input class="btn btnGrey" type="file" name="file" />
+                        <div class="col-md-9">
+                            <input style="XXXXXXX" class="btn btnGrey" type="file" name="file" />
                         </div>
                     </div>
                     <div class="form-group">
