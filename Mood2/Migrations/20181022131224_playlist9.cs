@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mood2.Migrations
 {
-    public partial class playlist5 : Migration
+    public partial class playlist9 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,32 +48,16 @@ namespace Mood2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Em",
+                name: "EmotionData",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Value = table.Column<double>(nullable: false),
-                    EmotionName = table.Column<string>(nullable: true),
-                    PlaylistId = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Em", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Playlist",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PlaylistLink = table.Column<string>(nullable: true),
-                    EmId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Playlist", x => x.Id);
+                    table.PrimaryKey("PK_EmotionData", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,15 +173,35 @@ namespace Mood2.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateWhenPlayed = table.Column<DateTime>(nullable: false),
-                    EmId = table.Column<int>(nullable: false)
+                    EmotionDataId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_History", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_History_Em_EmId",
-                        column: x => x.EmId,
-                        principalTable: "Em",
+                        name: "FK_History_EmotionData_EmotionDataId",
+                        column: x => x.EmotionDataId,
+                        principalTable: "EmotionData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Playlist",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PlaylistLink = table.Column<string>(nullable: true),
+                    EmotionDataId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Playlist", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Playlist_EmotionData_EmotionDataId",
+                        column: x => x.EmotionDataId,
+                        principalTable: "EmotionData",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -242,9 +246,14 @@ namespace Mood2.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_History_EmId",
+                name: "IX_History_EmotionDataId",
                 table: "History",
-                column: "EmId");
+                column: "EmotionDataId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Playlist_EmotionDataId",
+                table: "Playlist",
+                column: "EmotionDataId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -277,7 +286,7 @@ namespace Mood2.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Em");
+                name: "EmotionData");
         }
     }
 }

@@ -2,17 +2,13 @@
 
 namespace Mood2.Models
 {
-    public class OdeToMood
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+   
 
-    public class Em
-    {
-        public int Id { get; set; }
+    public class EmotionsFromApi
+
+    {       
         public double Value { get; set; }
         public string EmotionName { get; set; }
-        public int PlaylistId { get; set; }
+        
     }
 }

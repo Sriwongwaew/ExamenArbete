@@ -14,7 +14,7 @@ namespace Mood2.Data
         }
         public DbSet<Mood2.Models.History> History { get; set; }
         public DbSet<Mood2.Models.Playlist> Playlist { get; set; }
-        public DbSet<Mood2.Models.Em> Emotion { get; set; }
+        public DbSet<Mood2.Models.EmotionData> EmotionData { get; set; }
     }
     //protected override void OnModelCreating(ModelBuilder modelBuilder)
     //{

@@ -155,44 +155,44 @@ namespace Mood2.Controllers
 
             Models.FaceApiData.Emotion AllEmotion = emotions[0].faceAttributes.emotion;
 
-            var list = new List<Em>
+            var list = new List<EmotionsFromApi>
             {
-                new Em
+                new  EmotionsFromApi
                 {
                     EmotionName = "anger",
                     Value = AllEmotion.anger
                 },
-                new Em
+                new  EmotionsFromApi
                 {
                     EmotionName = "contempt",
                     Value = AllEmotion.contempt
                 },
-                new Em
+                new  EmotionsFromApi
                 {
                     EmotionName = "happiness",
                     Value = AllEmotion.happiness
                 },
-                new Em
+                new  EmotionsFromApi
                 {
                     EmotionName = "fear",
                     Value = AllEmotion.fear
                 },
-                new Em
+                new  EmotionsFromApi
                 {
                     EmotionName = "sadness",
                     Value = AllEmotion.sadness
                 },
-                new Em
+                new  EmotionsFromApi
                 {
                     EmotionName = "surprise",
                     Value = AllEmotion.surprise
                 },
-                new Em
+                new EmotionsFromApi
                 {
                     EmotionName = "neutral",
                     Value = AllEmotion.neutral
                 },
-                new Em
+                new  EmotionsFromApi
                 {
                     EmotionName = "disgust",
                     Value = AllEmotion.disgust

@@ -10,8 +10,8 @@ using Mood2.Data;
 namespace Mood2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181022120424_playlist6")]
-    partial class playlist6
+    [Migration("20181022131414_playlist10")]
+    partial class playlist10
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,21 +186,17 @@ namespace Mood2.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Mood2.Models.Em", b =>
+            modelBuilder.Entity("Mood2.Models.EmotionData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("EmotionName");
-
-                    b.Property<int>("PlaylistId");
-
-                    b.Property<double>("Value");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Emotion");
+                    b.ToTable("EmotionData");
                 });
 
             modelBuilder.Entity("Mood2.Models.History", b =>
@@ -211,11 +207,11 @@ namespace Mood2.Migrations
 
                     b.Property<DateTime>("DateWhenPlayed");
 
-                    b.Property<int>("EmId");
+                    b.Property<int>("EmotionDataId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmId");
+                    b.HasIndex("EmotionDataId");
 
                     b.ToTable("History");
                 });
@@ -226,11 +222,13 @@ namespace Mood2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmId");
+                    b.Property<int>("EmotionDataId");
 
                     b.Property<string>("PlaylistLink");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmotionDataId");
 
                     b.ToTable("Playlist");
                 });
@@ -282,9 +280,17 @@ namespace Mood2.Migrations
 
             modelBuilder.Entity("Mood2.Models.History", b =>
                 {
-                    b.HasOne("Mood2.Models.Em", "Emotion")
+                    b.HasOne("Mood2.Models.EmotionData", "EmotionData")
                         .WithMany()
-                        .HasForeignKey("EmId")
+                        .HasForeignKey("EmotionDataId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Mood2.Models.Playlist", b =>
+                {
+                    b.HasOne("Mood2.Models.EmotionData", "EmotionData")
+                        .WithMany()
+                        .HasForeignKey("EmotionDataId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace Mood2.Models
 {
-    public class Playlist
+    public class EmotionData
     {
         public int Id { get; set; }
-       
-        public string PlaylistLink{ get; set; }
-
-        public EmotionData EmotionData { get; set; }
-        public int EmotionDataId { get; set; }
-        
+        public string Name { get; set; }
     }
 }
