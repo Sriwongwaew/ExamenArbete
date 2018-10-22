@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mood2.Models
+namespace Mood2.Controllers
 {
-    public class Emotion
+    public class HistoryController
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        
     }
 }
