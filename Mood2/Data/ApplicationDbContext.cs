@@ -13,6 +13,5 @@ namespace Mood2.Data
         {
         }
         public DbSet<Mood2.Models.History> History { get; set; }
-        public DbSet<Mood2.Models.Playlist>Playlist { get; set; }
-    }
+    }    
 }
