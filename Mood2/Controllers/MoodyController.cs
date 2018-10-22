@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using Mood2.Data;
 
 namespace Mood2.Controllers
 {
@@ -24,6 +25,7 @@ namespace Mood2.Controllers
     {
         const string subscriptionKey = "5c7133efeece4731b6e6662bd6ff2278";
         const string uriBase = "https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect";
+        private ApplicationDbContext context;
 
         public IActionResult Index()
         {
@@ -98,6 +100,10 @@ namespace Mood2.Controllers
         [HttpPost("UploadPic")]
         public async Task<IActionResult> PostPic(string pic)
         {
+            if(pic == null)
+            {
+                return NoContent();
+            }
             string replaced = pic.Substring(22);
             string filePath = Path.GetTempFileName();
             byte[] bytes = Convert.FromBase64String(replaced);
@@ -114,8 +120,8 @@ namespace Mood2.Controllers
                 }
 
             }
-            var print = await MakeAnalysisRequest(filePath);
-            string emotionResult = ConvertToEmotion(print);
+            var result = await MakeAnalysisRequest(filePath);
+            string emotionResult = ConvertToEmotion(result);
             PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
             return View(emotionResult, playlist);
         } 
@@ -124,6 +130,10 @@ namespace Mood2.Controllers
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> Post(IFormFile file)
         {
+            if(file == null)
+            {
+                return NoContent();
+            }
             var filePath = Path.GetTempFileName();
 
             using (var stream = new FileStream(filePath, FileMode.Create))
@@ -131,9 +141,9 @@ namespace Mood2.Controllers
                 await file.CopyToAsync(stream);
             }
 
-            var print = await MakeAnalysisRequest(filePath);
+            var result = await MakeAnalysisRequest(filePath);
 
-            string emotionResult = ConvertToEmotion(print);
+            string emotionResult = ConvertToEmotion(result);
             PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
             return View(emotionResult, playlist);
 
