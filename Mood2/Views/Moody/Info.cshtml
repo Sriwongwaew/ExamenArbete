@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+@{
+    Layout = "_LayoutMood";
+}
+
+<html>
+
+<body>
+
+
+
+    <div class="container">
+        <br /><br />
+        <div class="accordion" id="accordionExample">
+            <div class="card cardColor">
+                <div class="card-header" id="headingOne" style="background-color: #585858;">
+
+
+
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: white; font-size: 18px;">
+                        Hur du använder applikationen
+                    </button>
+
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body" style="background-color: #2E2E2E; color: #458CCC; font-size: 20px;">
+
+                        <img src="~/img/PersonExample.jpg" style="width:40%;" />
+
+                        <div id="CollapseOneText">
+                            <a id="CollapseOneTextHeader" href="#">Ta en bild </a>
+                            <p>Välj en bild där hela ditt ansikte är synligt.</p>
+                            <p>Se till att bilden inte är för mörk.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo" style="background-color: #585858;">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: white; font-size: 18px;">
+                            Kontakta support
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body" style="background-color: #2E2E2E; color: #458CCC; font-size: 20px;">
+                        <a>Kundservice@Mood.se</a>
+                        <p>Delicato vägen 12, KISTA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree" style="background-color: #585858;">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color: white; font-size: 18px;">
+                            FAQ
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body" style="background-color: #2E2E2E; color: #458CCC; font-size: 20px;">
+                        <h1 style="font-size: 44px;">Hur säker är er humöranalys?</h1>
+
+                        Det beror på hur starkt uttryck ni visar på bild. <br /> Men vi använder oss av en känd AI analys
+                        som är pålitlig. <br />
+
+                        <br /><h1 style="font-size: 44px;">Sparar ni ner användarens bilder?</h1>
+                        Vi sparar endast bilden temporärt för en analys. <br />Därefter så raderas bilden hos oss.<br />
+
+                        <br /><h1 style="font-size: 44px;">Behöver man vara medlem hos er?</h1>
+                        Nej, du behöver inte vara medlem hos oss. <br /> Men vill du se din historik rekommenderar vi
+                        att du bli medlem.<br />
+
+                        <br /><h1 style="font-size: 44px;">Behöver man ha tillgång till en webkamera för att använda er tjänst?</h1>
+                        Nej, du kan antingen välja ditt humör utifrån en humörs-baserande emoji <br />eller ladda
+                        upp en bild ifrån din dator.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <link rel="stylesheet" href="~/css/main.css" />
+</body>
+</html>

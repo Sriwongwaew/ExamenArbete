@@ -30,6 +30,17 @@ namespace Mood2.Controllers
             return View();
         }
 
+
+        public IActionResult Historik()
+        {
+            return View();
+        }
+
+        public IActionResult Info()
+        {
+            return View();
+        }
+
         public IActionResult ReturnEmotionAndPlaylist(string emotion)
         {
             PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotion);
