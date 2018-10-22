@@ -30,7 +30,7 @@ namespace Mood2.Controllers
             return View();
         }
 
-        public IActionResult Kalle(string emotion)
+        public IActionResult ReturnEmotionAndPlaylist(string emotion)
         {
             PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotion);
             return View(emotion, playlist);
@@ -241,11 +241,8 @@ namespace Mood2.Controllers
 
 
             }
-            
-            
+                      
                 return result;
-
-            
 
         }
     }
