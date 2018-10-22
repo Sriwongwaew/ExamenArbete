@@ -191,6 +191,7 @@ namespace Mood.Controllers
             var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
             string emotionResult = primaryEmotion.EmotionName;
             return emotionResult;
+           
             
 
         }
