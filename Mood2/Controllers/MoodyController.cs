@@ -25,7 +25,6 @@ namespace Mood2.Controllers
     {
         const string subscriptionKey = "5c7133efeece4731b6e6662bd6ff2278";
         const string uriBase = "https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect";
-        private ApplicationDbContext context;
 
         public IActionResult Index()
         {
