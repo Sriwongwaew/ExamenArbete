@@ -13,5 +13,6 @@ namespace Mood2.Models
         public int Id { get; set; }
         public double Value { get; set; }
         public string EmotionName { get; set; }
+        public int PlaylistId { get; set; }
     }
 }

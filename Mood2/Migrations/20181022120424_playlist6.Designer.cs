@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mood2.Data;
 
-namespace Mood2.Data.Migrations
+namespace Mood2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181022112144_Ny tabel")]
-    partial class Nytabel
+    [Migration("20181022120424_playlist6")]
+    partial class playlist6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -194,11 +194,13 @@ namespace Mood2.Data.Migrations
 
                     b.Property<string>("EmotionName");
 
+                    b.Property<int>("PlaylistId");
+
                     b.Property<double>("Value");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Em");
+                    b.ToTable("Emotion");
                 });
 
             modelBuilder.Entity("Mood2.Models.History", b =>
@@ -211,13 +213,26 @@ namespace Mood2.Data.Migrations
 
                     b.Property<int>("EmId");
 
-                    b.Property<string>("Playlistsname");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EmId");
 
                     b.ToTable("History");
+                });
+
+            modelBuilder.Entity("Mood2.Models.Playlist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmId");
+
+                    b.Property<string>("PlaylistLink");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Playlist");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
