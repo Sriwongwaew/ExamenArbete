@@ -17,14 +17,34 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using Mood2.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mood2.Controllers
 {
     //[Authorize]
     public class MoodyController : Controller
     {
+        public MoodyController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
         const string subscriptionKey = "5c7133efeece4731b6e6662bd6ff2278";
         const string uriBase = "https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect";
+        private ApplicationDbContext _context;
+
+
+
+
+        public IActionResult SetupDatabase()
+        {
+            _context.EmotionData.Add(new EmotionData { Name = "anger" });
+            _context.EmotionData.Add(new EmotionData { Name = "glad" });
+            _context.EmotionData.Add(new EmotionData { Name = "glad" });
+            _context.SaveChanges();
+            return Ok();
+        }
 
         public IActionResult Index()
         {
@@ -44,7 +64,8 @@ namespace Mood2.Controllers
 
         public IActionResult ReturnEmotionAndPlaylist(string emotion)
         {
-            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotion);
+            PlaylistViewModel playlist = GetPlaylistByEmotion(emotion);
+
             return View(emotion, playlist);
         }
 
@@ -74,7 +95,7 @@ namespace Mood2.Controllers
 
                 string contentString = await response.Content.ReadAsStringAsync();
 
-                 return contentString;
+                return contentString;
             }
         }
 
@@ -89,8 +110,8 @@ namespace Mood2.Controllers
         }
 
         //gör metod som visar historik för inloggade användare
-        [HttpGet]        
-        public IActionResult ShowHistory ()
+        [HttpGet]
+        public IActionResult ShowHistory()
         {
             return View();
 
@@ -99,7 +120,7 @@ namespace Mood2.Controllers
         [HttpPost("UploadPic")]
         public async Task<IActionResult> PostPic(string pic)
         {
-            if(pic == null)
+            if (pic == null)
             {
                 return NoContent();
             }
@@ -121,15 +142,40 @@ namespace Mood2.Controllers
             }
             var result = await MakeAnalysisRequest(filePath);
             string emotionResult = ConvertToEmotion(result);
-            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
+            PlaylistViewModel playlist = GetPlaylistByEmotion(emotionResult);
+            //PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
             return View(emotionResult, playlist);
-        } 
+        }
+
+        private PlaylistViewModel GetPlaylistByEmotion(string emotionResult)
+        {
+            var listOfPlaylists = new List<string>();
+            var ThreePlaylists = new PlaylistViewModel();
+
+            foreach (var item in _context.Playlist.Include(x => x.EmotionData).Where(x => x.EmotionData.Name == emotionResult))
+            {
+                listOfPlaylists.Add(item.PlaylistLink);
+                
+            }
+
+            Random rnd = new Random();
+            var ResultList = listOfPlaylists.OrderBy(x => rnd.Next()).Take(3).ToList();
+
+            ThreePlaylists.Playlist1 = ResultList[0];
+            ThreePlaylists.Playlist2 = ResultList[1];
+            ThreePlaylists.Playlist3 = ResultList[2];
+
+            return ThreePlaylists;
+        }
 
         [AllowAnonymous]
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> Post(IFormFile file)
         {
-            if(file == null)
+
+
+
+            if (file == null)
             {
                 return NoContent();
             }
@@ -143,7 +189,7 @@ namespace Mood2.Controllers
             var result = await MakeAnalysisRequest(filePath);
 
             string emotionResult = ConvertToEmotion(result);
-            PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
+            PlaylistViewModel playlist = GetPlaylistByEmotion(emotionResult);
             return View(emotionResult, playlist);
 
         }
@@ -202,69 +248,76 @@ namespace Mood2.Controllers
             var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
             string emotionResult = primaryEmotion.EmotionName;
             return emotionResult;
-            
+
 
         }
 
-        [AllowAnonymous]
-        public PlaylistViewModel LinkPlaylistDependingOnEmotion(string emotionResult)
-        {
+        //[AllowAnonymous]
+        //public PlaylistViewModel LinkPlaylistDependingOnEmotion(string emotionResult)
+        //{
+        //    emotionResult = emotionResult.ToLower();
 
-            PlaylistViewModel result = new PlaylistViewModel();
+        //    if (!new[] { "anger", "contempt" }.Contains(emotionResult))
+        //    {
+        //        throw new ArgumentException("Ogiltig emotion");
+        //    }
 
-            if (emotionResult == "anger" || emotionResult == "contempt" || emotionResult == "disgust")
-            {
-                result.Playlist1 = $"https://open.spotify.com/embed/user/artkul/playlist/0ybhZEyc8RrHsVDFt9x5CI";
-                result.Playlist2 = $"https://open.spotify.com/embed/user/1239561108/playlist/29EOIjr2saw00KxpYdYSQM";
-                result.Playlist3 = $"https://open.spotify.com/embed/user/dvaughan2021/playlist/5Am1VHtu0oJAc5omSVHvat";
-                return result;
-            }
-            else if (emotionResult == "happiness")
-            {
-                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-                result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-            }
-            else if (emotionResult == "fear")
-            {
-                result.Playlist1 = $"https://open.spotify.com/embed/show/5XhS5WBxLYgN3S9KhEyrrF";
-                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6SpcerLn1dx";
-                result.Playlist3 = $"https://open.spotify.com/embed/user/warnermusicus/playlist/59njg5yJwvLH2vAuaZdAZD";
-                return result;
+            //    PlaylistViewModel result = new PlaylistViewModel();
 
-
-            }
-            else if (emotionResult == "sadness")
-            {
-                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX3YSRoSdA634";
-                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX7qK8ma5wgG1";
-                result.Playlist3 = $"https://open.spotify.com/embed/user/funnybunny000000/playlist/4EoPt05ztUjVaujcWbUL2Z";
-                return result;
+            //    if (emotionResult == "anger" || emotionResult == "contempt" || emotionResult == "disgust")
+            //    {
+            //        result.Playlist1 = $"https://open.spotify.com/embed/user/artkul/playlist/0ybhZEyc8RrHsVDFt9x5CI";
+            //        result.Playlist2 = $"https://open.spotify.com/embed/user/1239561108/playlist/29EOIjr2saw00KxpYdYSQM";
+            //        result.Playlist3 = $"https://open.spotify.com/embed/user/dvaughan2021/playlist/5Am1VHtu0oJAc5omSVHvat";
+            //        return result;
+            //    }
+            //    else if (emotionResult == "happiness")
+            //    {
+            //        result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+            //        result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+            //        result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
+            //    }
+            //    else if (emotionResult == "fear")
+            //    {
+            //        result.Playlist1 = $"https://open.spotify.com/embed/show/5XhS5WBxLYgN3S9KhEyrrF";
+            //        result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6SpcerLn1dx";
+            //        result.Playlist3 = $"https://open.spotify.com/embed/user/warnermusicus/playlist/59njg5yJwvLH2vAuaZdAZD";
+            //        return result;
 
 
-            }
-            else if (emotionResult == "surprise")
-            {
-                result.Playlist1 = $"https://open.spotify.com/embed/user/ofinns/playlist/61CPcnHmTVMloD399c76et";
-                result.Playlist2 = $"https://open.spotify.com/embed/user/juandurfelworld/playlist/1SUu5S4mKpyOEeuImxGM64";
-                result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWSEMER0I7qzl";
-                return result;
+            //    }
+            //    else if (emotionResult == "sadness")
+            //    {
+            //        result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX3YSRoSdA634";
+            //        result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX7qK8ma5wgG1";
+            //        result.Playlist3 = $"https://open.spotify.com/embed/user/funnybunny000000/playlist/4EoPt05ztUjVaujcWbUL2Z";
+            //        return result;
 
 
-            }
-            else if (emotionResult == "neutral")
-            {
-                result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbITWG1ZJKYt";
-                result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWTkxQvqMy4WW";
-                result.Playlist3 = $"https://open.spotify.com/embed/user/foilism/playlist/37qanRa2o6oa2l0TkMNdnD";
-                return result;
+            //    }
+            //    else if (emotionResult == "surprise")
+            //    {
+            //        result.Playlist1 = $"https://open.spotify.com/embed/user/ofinns/playlist/61CPcnHmTVMloD399c76et";
+            //        result.Playlist2 = $"https://open.spotify.com/embed/user/juandurfelworld/playlist/1SUu5S4mKpyOEeuImxGM64";
+            //        result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWSEMER0I7qzl";
+            //        return result;
 
 
-            }
-                      
-                return result;
+            //    }
+            //    else if (emotionResult == "neutral")
+            //    {
+            //        result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbITWG1ZJKYt";
+            //        result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWTkxQvqMy4WW";
+            //        result.Playlist3 = $"https://open.spotify.com/embed/user/foilism/playlist/37qanRa2o6oa2l0TkMNdnD";
+            //        return result;
 
-        }
+
+            //    }
+
+            //    return result;
+
+            //}
+        
     }
 }
 
