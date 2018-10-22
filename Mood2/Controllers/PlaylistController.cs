@@ -16,5 +16,10 @@ namespace Mood2.Controllers
         {
             _context = context;
         }
+        public List<Models.Playlist> GetPlayList()
+        {
+            var playlist = _context.Playlist.ToList();
+            return playlist;
+        }
     }
 }
