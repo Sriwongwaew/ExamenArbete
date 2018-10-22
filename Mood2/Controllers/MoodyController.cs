@@ -133,7 +133,7 @@ namespace Mood2.Controllers
         {
             var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
 
-            Emotion AllEmotion = emotions[0].faceAttributes.emotion;
+            Models.FaceApiData.Emotion AllEmotion = emotions[0].faceAttributes.emotion;
 
             var list = new List<Em>
             {

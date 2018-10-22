@@ -12,5 +12,7 @@ namespace Mood2.Data
             : base(options)
         {
         }
+        public DbSet<Mood2.Models.History> History { get; set; }
+        public DbSet<Mood2.Models.Playlist>Playlist { get; set; }
     }
 }
