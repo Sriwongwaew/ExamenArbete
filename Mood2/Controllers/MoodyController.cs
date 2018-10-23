@@ -289,37 +289,37 @@ namespace Mood2.Controllers
              new Playlist //-------
              {
                  EmotionDataId = fearID.Id,
-                 PlaylistLink = " "
+                 PlaylistLink = "https://open.spotify.com/user/1222144685/playlist/2x1PpZv5jzhUGxzztJwaNi?si=qXq05bCQRoCVxdCQueWXvQ"
              },
               new Playlist
               {
                   EmotionDataId = fearID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/spotify/playlist/37i9dQZF1DX82SvZY6fOWx?si=ks9M7iBiQUOMqJqpGrQ9dQ"
               },
               new Playlist
               {
                   EmotionDataId = fearID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/1284086214/playlist/2cfr9ecGedQM3WhxRWZtLE?si=r90j5fFWTceSSL87hnG47Q"
               },
               new Playlist
               {
                   EmotionDataId = fearID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/hauntedwisconsin.com/playlist/23NaNmH6LuCctSM6lplaZb?si=YQ2Fz5LgQaCJdWLCiU_kaQ"
               },
               new Playlist
               {
                   EmotionDataId = fearID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/128899670/playlist/2tvNusayRwIpqd55BA9y1T?si=RJDZrkVoSZCpdlGwa1JrGg"
               },
               new Playlist
               {
                   EmotionDataId = fearID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/album/2kUJgoPA2iz9c2jzUr0y1x?si=MIQjrXW5Tc-X7SCaOXSE0Q"
               },
                new Playlist
                {
                    EmotionDataId = fearID.Id,
-                   PlaylistLink = " "
+                   PlaylistLink = "https://open.spotify.com/show/4CSrmtPagkWuNGy4JocfNB?si=WlPohoTuQA-EH31YLA5o0g"
                });
 
             //--------------------------------------------------------------
