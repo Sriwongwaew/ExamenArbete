@@ -18,12 +18,15 @@ using System.Threading.Tasks;
 using System.Web;
 using Mood2.Data;
 using Microsoft.EntityFrameworkCore;
+using Mood2.Services;
 
 namespace Mood2.Controllers
 {
     //[Authorize]
     public class MoodyController : Controller
     {
+        MoodService moodService = new MoodService();
+
         public MoodyController(ApplicationDbContext context)
         {
             _context = context;
@@ -53,7 +56,8 @@ namespace Mood2.Controllers
 
         public IActionResult ReturnEmotionAndPlaylist(string emotion)
         {
-            PlaylistViewModel playlist = GetPlaylistByEmotion(emotion);
+            var playlists = FilterPlaylistsByEmotion(emotion);
+            PlaylistViewModel playlist = moodService.GetPlaylistByEmotion(playlists);
             SaveToHistory(emotion, playlist);
             return View(emotion, playlist);
         }
@@ -131,30 +135,16 @@ namespace Mood2.Controllers
             }
             var result = await MakeAnalysisRequest(filePath);
             string emotionResult = ConvertToEmotion(result);
-            PlaylistViewModel playlist = GetPlaylistByEmotion(emotionResult);
+            PlaylistViewModel playlist = moodService.GetPlaylistByEmotion(FilterPlaylistsByEmotion(emotionResult));
             SaveToHistory(emotionResult, playlist);
             return View(emotionResult, playlist);
         }
 
-        private PlaylistViewModel GetPlaylistByEmotion(string emotionResult)
+
+
+        public List<Playlist> FilterPlaylistsByEmotion(string emotion)
         {
-            var listOfPlaylists = new List<string>();
-            var ThreePlaylists = new PlaylistViewModel();
-
-            foreach (var item in _context.Playlist.Include(x => x.EmotionData).Where(x => x.EmotionData.Name == emotionResult))
-            {
-                listOfPlaylists.Add(item.PlaylistLink);
-                
-            }
-
-            Random rnd = new Random();
-            var ResultList = listOfPlaylists.OrderBy(x => rnd.Next()).Take(3).ToList();
-
-            ThreePlaylists.Playlist1 = ResultList[0];
-            ThreePlaylists.Playlist2 = ResultList[1];
-            ThreePlaylists.Playlist3 = ResultList[2];
-
-            return ThreePlaylists;
+            return _context.Playlist.Include(x => x.EmotionData).Where(x => x.EmotionData.Name == emotion).ToList();
         }
 
         [AllowAnonymous]
@@ -178,7 +168,7 @@ namespace Mood2.Controllers
             var result = await MakeAnalysisRequest(filePath);
 
             string emotionResult = ConvertToEmotion(result);
-            PlaylistViewModel playlist = GetPlaylistByEmotion(emotionResult);
+            PlaylistViewModel playlist = moodService.GetPlaylistByEmotion(FilterPlaylistsByEmotion( emotionResult));
             SaveToHistory(emotionResult, playlist);
             return View(emotionResult, playlist);
 
