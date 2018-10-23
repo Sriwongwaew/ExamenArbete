@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Mood2.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Mood2.Services;
 
 namespace Mood2
 {
@@ -39,6 +40,7 @@ namespace Mood2
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<MoodService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
