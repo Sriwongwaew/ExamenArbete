@@ -17,10 +17,6 @@ namespace Mood2.Controllers
         {
             _context = context;
         }
-        // GET: History
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.History.Include(x => x.EmotionData).ToListAsync());
-        }
+      
     }
 }
