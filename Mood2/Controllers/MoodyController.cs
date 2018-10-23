@@ -343,37 +343,37 @@ namespace Mood2.Controllers
              new Playlist //-------
              {
                  EmotionDataId = neutralID.Id,
-                 PlaylistLink = " "
+                 PlaylistLink = "https://open.spotify.com/user/spotify/playlist/37i9dQZF1DX4WYpdgoIcn6?si=Dvsd5HsDSwGay9Cg8Lb9Gw"
              },
               new Playlist
               {
                   EmotionDataId = neutralID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/spotify/playlist/37i9dQZF1DWVYZVgDjIR7c?si=bsa4-gDPTjmaJAOcMz9_Tg"
               },
               new Playlist
               {
                   EmotionDataId = neutralID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/spotify/playlist/37i9dQZF1DXcBWIGoYBM5M?si=ZPbjmypOSg-IusRuJ_9KAg"
               },
               new Playlist
               {
                   EmotionDataId = neutralID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/spotify/playlist/37i9dQZF1DXc4CrXgl8cum?si=uXpKr0wvS2-iYUHpyiJO9g"
               },
               new Playlist
               {
                   EmotionDataId = neutralID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/spotify/playlist/37i9dQZF1DXcF6B6QPhFDv?si=VCFc1vVLRGWY7b9VU6-n4Q"
               },
               new Playlist
               {
                   EmotionDataId = neutralID.Id,
-                  PlaylistLink = " "
+                  PlaylistLink = "https://open.spotify.com/user/spotify/playlist/37i9dQZF1DXcF6B6QPhFDv?si=d5B4575kRdS6UOLi0UJ0Lg"
               },
                new Playlist
                {
                    EmotionDataId = neutralID.Id,
-                   PlaylistLink = " "
+                   PlaylistLink = "https://open.spotify.com/user/spotify/playlist/37i9dQZF1DXaXB8fQg7xif?si=pc6zz6j4QhWyTAFPkkam4A"
                });
 
             _context.SaveChanges();
