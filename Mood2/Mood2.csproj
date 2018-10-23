@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Content Remove="Views\Moody\anger.cshtml" />
-    <Content Remove="wwwroot\css\main.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,7 +86,7 @@
 
   <ItemGroup>
     <None Include="Views\Moody\anger.cshtml" />
-    <None Include="wwwroot\css\main.css" />
+    <None Include="wwwroot\css\AmaticSC-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>

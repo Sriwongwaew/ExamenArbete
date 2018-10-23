@@ -1,4 +1,4 @@
-﻿
+﻿@model List<History>
 @{
     Layout = "_LayoutMood";
 }
@@ -29,13 +29,17 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach (var item in Model)
+                {
                 <tr>
                     <th scope="row">1</th>
                     <td>
-                        <a href="@Model.Playlist">Sad songs</a>
+                        <a href="@item.Playlist">Sad songs</a>
                     </td>
-                    <td>@Model.Emotion</td>
+                    <td>@item.Emotion</td>
                 </tr>
+                }
+                
 
             </tbody>
         </table>
