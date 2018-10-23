@@ -20,25 +20,7 @@ namespace Mood2.Test
             var message = client.GetAsync(testEndpointUrl).Result;
             Assert.IsTrue(message.IsSuccessStatusCode);
 
-        }
-         
-        //[TestMethod]
-        //public void should_give_three_playslists_when_many_playlists_is_supplied()
-        //{
-        //    var x = new MoodService();
-        //    var result = x.GetPlaylistByEmotion(new List<Playlist>
-        //    {
-        //        new Playlist{PlaylistLink="aaa"},
-        //        new Playlist{PlaylistLink="bbb"},
-        //        new Playlist{PlaylistLink="ccc"},
-        //        new Playlist{PlaylistLink="ddd"},
-
-        //    });
-
-        //    Assert.IsNotNull(result.Playlist1);
-        //    Assert.IsNotNull(result.Playlist2);
-        //    Assert.IsNotNull(result.Playlist3);
-
-        //}
+        }       
+        
     }
 }
