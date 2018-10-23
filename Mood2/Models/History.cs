@@ -6,9 +6,8 @@ namespace Mood2.Models
     {
         public int Id { get; set; }
         public DateTime DateWhenPlayed { get; set; }
-        public EmotionData EmotionData { get; set; }
-        public int EmotionDataId { get; set; }
-        
-       
+        public string Emotion { get; set; }
+        public string Playlist { get; set; }
+
     }
 }
