@@ -65,7 +65,7 @@ namespace Mood2.Controllers
         public IActionResult ReturnEmotionAndPlaylist(string emotion)
         {
             PlaylistViewModel playlist = GetPlaylistByEmotion(emotion);
-
+            SaveToHistory(emotion, playlist);
             return View(emotion, playlist);
         }
 
@@ -113,8 +113,8 @@ namespace Mood2.Controllers
         [HttpGet]
         public IActionResult ShowHistory()
         {
-            return View();
-
+            var historyList = _context.History.Take(10).OrderByDescending(x => x.DateWhenPlayed).ToList();
+            return View("Historik", historyList);
         }
 
         [HttpPost("UploadPic")]
@@ -143,7 +143,7 @@ namespace Mood2.Controllers
             var result = await MakeAnalysisRequest(filePath);
             string emotionResult = ConvertToEmotion(result);
             PlaylistViewModel playlist = GetPlaylistByEmotion(emotionResult);
-            //PlaylistViewModel playlist = LinkPlaylistDependingOnEmotion(emotionResult);
+            SaveToHistory(emotionResult, playlist);
             return View(emotionResult, playlist);
         }
 
@@ -190,8 +190,21 @@ namespace Mood2.Controllers
 
             string emotionResult = ConvertToEmotion(result);
             PlaylistViewModel playlist = GetPlaylistByEmotion(emotionResult);
+            SaveToHistory(emotionResult, playlist);
             return View(emotionResult, playlist);
 
+        }
+
+        private void SaveToHistory(string emotionResult, PlaylistViewModel playlist)
+        {
+            _context.History.Add(new History
+            {
+                Playlist = playlist.Playlist1,
+                DateWhenPlayed = DateTime.Now,
+                Emotion = emotionResult
+
+            });
+            _context.SaveChanges();
         }
 
         [AllowAnonymous]
