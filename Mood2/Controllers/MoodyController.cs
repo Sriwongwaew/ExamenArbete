@@ -41,11 +41,6 @@ namespace Mood2.Controllers
         }
 
 
-        public IActionResult Historik()
-        {
-            return View();
-        }
-
         public IActionResult Info()
         {
             return View();
@@ -100,7 +95,7 @@ namespace Mood2.Controllers
 
         //gör metod som visar historik för inloggade användare
         [HttpGet]
-        public IActionResult ShowHistory()
+        public IActionResult Historik()
         {
             var historyList = _context.History.Take(10).OrderByDescending(x => x.DateWhenPlayed).ToList();
             return View("Historik", historyList);
