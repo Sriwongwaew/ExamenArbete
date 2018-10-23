@@ -205,11 +205,11 @@ namespace Mood2.Migrations
 
                     b.Property<DateTime>("DateWhenPlayed");
 
-                    b.Property<int>("EmotionDataId");
+                    b.Property<string>("Emotion");
+
+                    b.Property<string>("Playlist");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmotionDataId");
 
                     b.ToTable("History");
                 });
@@ -273,14 +273,6 @@ namespace Mood2.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Mood2.Models.History", b =>
-                {
-                    b.HasOne("Mood2.Models.EmotionData", "EmotionData")
-                        .WithMany()
-                        .HasForeignKey("EmotionDataId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

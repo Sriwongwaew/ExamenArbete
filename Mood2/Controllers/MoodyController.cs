@@ -35,17 +35,6 @@ namespace Mood2.Controllers
         private ApplicationDbContext _context;
 
 
-
-
-        public IActionResult SetupDatabase()
-        {
-            _context.EmotionData.Add(new EmotionData { Name = "anger" });
-            _context.EmotionData.Add(new EmotionData { Name = "glad" });
-            _context.EmotionData.Add(new EmotionData { Name = "glad" });
-            _context.SaveChanges();
-            return Ok();
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -212,7 +201,7 @@ namespace Mood2.Controllers
         {
             var emotions = JsonConvert.DeserializeObject<List<Class1>>(print);
 
-            Models.FaceApiData.Emotion AllEmotion = emotions[0].faceAttributes.emotion;
+            Emotion AllEmotion = emotions[0].faceAttributes.emotion;
 
             var list = new List<EmotionsFromApi>
             {
@@ -264,73 +253,6 @@ namespace Mood2.Controllers
 
 
         }
-
-        //[AllowAnonymous]
-        //public PlaylistViewModel LinkPlaylistDependingOnEmotion(string emotionResult)
-        //{
-        //    emotionResult = emotionResult.ToLower();
-
-        //    if (!new[] { "anger", "contempt" }.Contains(emotionResult))
-        //    {
-        //        throw new ArgumentException("Ogiltig emotion");
-        //    }
-
-            //    PlaylistViewModel result = new PlaylistViewModel();
-
-            //    if (emotionResult == "anger" || emotionResult == "contempt" || emotionResult == "disgust")
-            //    {
-            //        result.Playlist1 = $"https://open.spotify.com/embed/user/artkul/playlist/0ybhZEyc8RrHsVDFt9x5CI";
-            //        result.Playlist2 = $"https://open.spotify.com/embed/user/1239561108/playlist/29EOIjr2saw00KxpYdYSQM";
-            //        result.Playlist3 = $"https://open.spotify.com/embed/user/dvaughan2021/playlist/5Am1VHtu0oJAc5omSVHvat";
-            //        return result;
-            //    }
-            //    else if (emotionResult == "happiness")
-            //    {
-            //        result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-            //        result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-            //        result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXdPec7aLTmlC";
-            //    }
-            //    else if (emotionResult == "fear")
-            //    {
-            //        result.Playlist1 = $"https://open.spotify.com/embed/show/5XhS5WBxLYgN3S9KhEyrrF";
-            //        result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6SpcerLn1dx";
-            //        result.Playlist3 = $"https://open.spotify.com/embed/user/warnermusicus/playlist/59njg5yJwvLH2vAuaZdAZD";
-            //        return result;
-
-
-            //    }
-            //    else if (emotionResult == "sadness")
-            //    {
-            //        result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX3YSRoSdA634";
-            //        result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX7qK8ma5wgG1";
-            //        result.Playlist3 = $"https://open.spotify.com/embed/user/funnybunny000000/playlist/4EoPt05ztUjVaujcWbUL2Z";
-            //        return result;
-
-
-            //    }
-            //    else if (emotionResult == "surprise")
-            //    {
-            //        result.Playlist1 = $"https://open.spotify.com/embed/user/ofinns/playlist/61CPcnHmTVMloD399c76et";
-            //        result.Playlist2 = $"https://open.spotify.com/embed/user/juandurfelworld/playlist/1SUu5S4mKpyOEeuImxGM64";
-            //        result.Playlist3 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWSEMER0I7qzl";
-            //        return result;
-
-
-            //    }
-            //    else if (emotionResult == "neutral")
-            //    {
-            //        result.Playlist1 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbITWG1ZJKYt";
-            //        result.Playlist2 = $"https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DWTkxQvqMy4WW";
-            //        result.Playlist3 = $"https://open.spotify.com/embed/user/foilism/playlist/37qanRa2o6oa2l0TkMNdnD";
-            //        return result;
-
-
-            //    }
-
-            //    return result;
-
-            //}
-        
     }
 }
 
