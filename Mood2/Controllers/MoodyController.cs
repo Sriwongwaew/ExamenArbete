@@ -24,8 +24,9 @@ namespace Mood2.Controllers
     //[Authorize]
     public class MoodyController : Controller
     {
+        private ApplicationDbContext _context;
 
-       
+
         public MoodyController(ApplicationDbContext context)
         {
             _context = context;
@@ -36,7 +37,6 @@ namespace Mood2.Controllers
 
         const string subscriptionKey = "5c7133efeece4731b6e6662bd6ff2278";
         const string uriBase = "https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect";
-        private ApplicationDbContext _context;
 
 
         public IActionResult Index()
@@ -49,12 +49,7 @@ namespace Mood2.Controllers
             return View();
         }
 
-        public IActionResult AllaSpellistor()
-        {
-            List<Playlist> ShowAllPlaylists = _context.Playlist.ToList();
-            return View(ShowAllPlaylists);
-        }
-
+       
         public IActionResult ReturnEmotionAndPlaylist(string emotion)
         {
             try
