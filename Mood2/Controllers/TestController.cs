@@ -20,7 +20,7 @@ namespace Mood2.Controllers
         public bool CheckIfAllSpotifyLinksIsOkay()
         {
             // Hämta alla länkar från databasen
-            foreach (var playlist in _context.Playlist.Select(x => x.PlaylistLink))
+            foreach (var playlist in _context.Playlist.Select(x => x.PlayListLink))
             {                
                 HttpClient client = new HttpClient();
 

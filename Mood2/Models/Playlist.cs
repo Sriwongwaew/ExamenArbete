@@ -10,8 +10,9 @@ namespace Mood2.Models
     {
         public int Id { get; set; }
        
-        public string PlaylistLink{ get; set; }
+        public string PlayListLink{ get; set; }
 
+        public string PlayListName { get; set; }
         public EmotionData EmotionData { get; set; }
         public int EmotionDataId { get; set; }
         

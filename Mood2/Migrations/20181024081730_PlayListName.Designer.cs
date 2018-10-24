@@ -10,8 +10,8 @@ using Mood2.Data;
 namespace Mood2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181023115907_First")]
-    partial class First
+    [Migration("20181024081730_PlayListName")]
+    partial class PlayListName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,7 +224,9 @@ namespace Mood2.Migrations
 
                     b.Property<int>("EmotionDataId");
 
-                    b.Property<string>("PlaylistLink");
+                    b.Property<string>("PlayListLink");
+
+                    b.Property<string>("PlayListName");
 
                     b.HasKey("Id");
 

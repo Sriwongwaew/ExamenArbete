@@ -152,7 +152,7 @@ namespace Mood2.Controllers
 
             foreach (var item in _context.Playlist.Include(x => x.EmotionData).Where(x => x.EmotionData.Name == emotionResult))
             {
-                listOfPlaylists.Add(item.PlaylistLink);
+                listOfPlaylists.Add(item.PlayListLink);
 
             }
 
