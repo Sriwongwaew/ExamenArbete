@@ -135,13 +135,16 @@ namespace Mood2.Controllers
 
         private PlaylistViewModel GetPlaylistByEmotion(string emotionResult)
         {
-            var listOfPlaylists = new List<string>();
+            var listOfPlaylists = new List<Playlist>();
             var ThreePlaylists = new PlaylistViewModel();
 
             foreach (var item in _context.Playlist.Include(x => x.EmotionData).Where(x => x.EmotionData.Name == emotionResult))
             {
-                listOfPlaylists.Add(item.PlaylistLink);
+                var playlist = new Playlist();
+                playlist.PlaylistLink = item.PlaylistLink;
+                
 
+                listOfPlaylists.Add(item.PlaylistLink);
             }
 
             Random rnd = new Random();

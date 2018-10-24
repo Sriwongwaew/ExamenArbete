@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mood2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace Mood2.ViewModels
 {
     public class PlaylistViewModel
     {
-        public string Playlist1 { get; set; }
-        public string Playlist2 { get; set; }
-        public string Playlist3 { get; set; }
+        public Playlist Playlist1 { get; set; }
+        public Playlist Playlist2 { get; set; }
+        public Playlist Playlist3 { get; set; }
 
     }
 }
