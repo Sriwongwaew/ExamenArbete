@@ -57,7 +57,7 @@ namespace Mood2.Controllers
  
                 SaveToHistory(emotion, playlist);
 
-                if (emotion.ToLower() == "anger")
+                if (emotion.ToLower() == "anger" || emotion.ToLower() == "disgust" || emotion.ToLower() == "contempt")
                     return View("anger2", playlist);
 
                 return View(emotion, playlist);
@@ -263,6 +263,10 @@ namespace Mood2.Controllers
 
             var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
             string emotionResult = primaryEmotion.EmotionName;
+            if (emotionResult == "disgust" || emotionResult == "contempt")
+            {
+                emotionResult = "anger";
+            }
             return emotionResult;
 
 
