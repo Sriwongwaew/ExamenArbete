@@ -152,12 +152,15 @@ namespace Mood2.Controllers
 
             foreach (var item in _context.Playlist.Include(x => x.EmotionData).Where(x => x.EmotionData.Name == emotionResult))
             {
+<<<<<<< HEAD
                 var playlist = new Playlist();
-                playlist.PlayListLink = item.PlayListLink;
-                playlist.PlayListName = item.PlayListName;
+                playlist.PlaylistLink = item.PlaylistLink;
+                
+=======
+                listOfPlaylists.Add(item.PlayListLink);
+>>>>>>> fb42bbf2ce9a5390b9247780061d6d04930c354f
 
-                listOfPlaylists.Add(playlist);
-
+                listOfPlaylists.Add(item.PlaylistLink);
             }
 
             Random rnd = new Random();
@@ -201,8 +204,7 @@ namespace Mood2.Controllers
         {
             _context.History.Add(new History
             {
-                PlaylistLink = playlist.Playlist1.PlayListLink,
-                PlaylistName = playlist.Playlist1.PlayListName,
+                Playlist = playlist.Playlist1,
                 DateWhenPlayed = DateTime.Now,
                 Emotion = emotionResult
 
