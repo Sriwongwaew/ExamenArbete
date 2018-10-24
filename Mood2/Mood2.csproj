@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Moody\anger2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Moody\fear.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

@@ -50,9 +50,21 @@ namespace Mood2.Controllers
 
         public IActionResult ReturnEmotionAndPlaylist(string emotion)
         {
-            PlaylistViewModel playlist = GetPlaylistByEmotion(emotion);
-            SaveToHistory(emotion, playlist);
-            return View(emotion, playlist);
+            try
+            {
+                PlaylistViewModel playlist = GetPlaylistByEmotion(emotion);
+
+ 
+                SaveToHistory(emotion, playlist);
+
+                if (emotion.ToLower() == "anger")
+                    return View("anger2", playlist);
+
+                return View(emotion, playlist);
+            } catch (Exception ex)
+            {
+                return Ok(ex);
+            }
         }
 
         static async Task<string> MakeAnalysisRequest(string pic)
