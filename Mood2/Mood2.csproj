@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -7,15 +7,18 @@
 
   <ItemGroup>
     <Content Remove="Views\Moody\anger.cshtml" />
-    <Content Remove="wwwroot\css\main.css" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0-preview1-final" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Moody\anger2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Moody\fear.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -87,7 +90,7 @@
 
   <ItemGroup>
     <None Include="Views\Moody\anger.cshtml" />
-    <None Include="wwwroot\css\main.css" />
+    <None Include="wwwroot\css\AmaticSC-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>

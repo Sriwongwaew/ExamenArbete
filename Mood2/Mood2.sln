@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mood2", "Mood2.csproj", "{8DFFE095-4F44-4327-968F-0392EFDF3DF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DFFE095-4F44-4327-968F-0392EFDF3DF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFFE095-4F44-4327-968F-0392EFDF3DF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFFE095-4F44-4327-968F-0392EFDF3DF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFFE095-4F44-4327-968F-0392EFDF3DF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12F33722-28ED-4CEF-845F-268525281132}
+	EndGlobalSection
+EndGlobal

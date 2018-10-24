@@ -2,7 +2,7 @@
 
 namespace Mood2.Migrations
 {
-    public partial class playlist10 : Migration
+    public partial class lol1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

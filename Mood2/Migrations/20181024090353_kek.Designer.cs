@@ -10,8 +10,8 @@ using Mood2.Data;
 namespace Mood2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181022131224_playlist9")]
-    partial class playlist9
+    [Migration("20181024090353_kek")]
+    partial class kek
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -207,11 +207,13 @@ namespace Mood2.Migrations
 
                     b.Property<DateTime>("DateWhenPlayed");
 
-                    b.Property<int>("EmotionDataId");
+                    b.Property<string>("Emotion");
+
+                    b.Property<string>("PlaylistLink");
+
+                    b.Property<string>("PlaylistName");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmotionDataId");
 
                     b.ToTable("History");
                 });
@@ -224,7 +226,9 @@ namespace Mood2.Migrations
 
                     b.Property<int>("EmotionDataId");
 
-                    b.Property<string>("PlaylistLink");
+                    b.Property<string>("PlayListLink");
+
+                    b.Property<string>("PlayListName");
 
                     b.HasKey("Id");
 
@@ -275,14 +279,6 @@ namespace Mood2.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Mood2.Models.History", b =>
-                {
-                    b.HasOne("Mood2.Models.EmotionData", "EmotionData")
-                        .WithMany()
-                        .HasForeignKey("EmotionDataId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

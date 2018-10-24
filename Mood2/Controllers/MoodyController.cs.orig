@@ -24,19 +24,17 @@ namespace Mood2.Controllers
     //[Authorize]
     public class MoodyController : Controller
     {
-        private ApplicationDbContext _context;
 
-
+       
         public MoodyController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-    
-
 
         const string subscriptionKey = "5c7133efeece4731b6e6662bd6ff2278";
         const string uriBase = "https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect";
+        private ApplicationDbContext _context;
 
 
         public IActionResult Index()
@@ -44,12 +42,12 @@ namespace Mood2.Controllers
             return View();
         }
 
+
         public IActionResult Info()
         {
             return View();
         }
 
-       
         public IActionResult ReturnEmotionAndPlaylist(string emotion)
         {
             try
@@ -59,7 +57,7 @@ namespace Mood2.Controllers
  
                 SaveToHistory(emotion, playlist);
 
-                if (emotion.ToLower() == "anger" || emotion.ToLower() == "disgust" || emotion.ToLower() == "contempt")
+                if (emotion.ToLower() == "anger")
                     return View("anger2", playlist);
 
                 return View(emotion, playlist);
@@ -154,12 +152,15 @@ namespace Mood2.Controllers
 
             foreach (var item in _context.Playlist.Include(x => x.EmotionData).Where(x => x.EmotionData.Name == emotionResult))
             {
+<<<<<<< HEAD
                 var playlist = new Playlist();
-                playlist.PlayListLink = item.PlayListLink;
-                playlist.PlayListName = item.PlayListName;
+                playlist.PlaylistLink = item.PlaylistLink;
+                
+=======
+                listOfPlaylists.Add(item.PlayListLink);
+>>>>>>> fb42bbf2ce9a5390b9247780061d6d04930c354f
 
-                listOfPlaylists.Add(playlist);
-
+                listOfPlaylists.Add(item.PlaylistLink);
             }
 
             Random rnd = new Random();
@@ -203,8 +204,7 @@ namespace Mood2.Controllers
         {
             _context.History.Add(new History
             {
-                PlaylistLink = playlist.Playlist1.PlayListLink,
-                PlaylistName = playlist.Playlist1.PlayListName,
+                Playlist = playlist.Playlist1,
                 DateWhenPlayed = DateTime.Now,
                 Emotion = emotionResult
 
@@ -265,10 +265,6 @@ namespace Mood2.Controllers
 
             var primaryEmotion = list.OrderByDescending(x => x.Value).FirstOrDefault();
             string emotionResult = primaryEmotion.EmotionName;
-            if (emotionResult == "disgust" || emotionResult == "contempt")
-            {
-                emotionResult = "anger";
-            }
             return emotionResult;
 
 

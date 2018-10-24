@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+Mood2/Migrations/20181023084243_new-update.cs
+Mood2/Migrations/20181023084243_new-update.Designer.cs
+Mood2/Migrations/20181023081946_NyDatabas.cs
+Mood2/Migrations/20181023081946_NyDatabas.Designer.cs
