@@ -44,16 +44,15 @@ namespace Mood2.Controllers
             return View();
         }
 
-
-        public IActionResult HistorikSpellistor()
-        {
-            List<Playlist> ShowAllPlaylists =  _context.Playlist.ToList();
-            return View(ShowAllPlaylists);
-        }
-
         public IActionResult Info()
         {
             return View();
+        }
+
+        public IActionResult AllaSpellistor()
+        {
+            List<Playlist> ShowAllPlaylists = _context.Playlist.ToList();
+            return View(ShowAllPlaylists);
         }
 
         public IActionResult ReturnEmotionAndPlaylist(string emotion)
