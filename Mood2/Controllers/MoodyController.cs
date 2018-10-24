@@ -197,7 +197,7 @@ namespace Mood2.Controllers
         {
             _context.History.Add(new History
             {
-                Playlist = playlist.Playlist1,
+                Playlist = Pla.Playlist1,
                 DateWhenPlayed = DateTime.Now,
                 Emotion = emotionResult
 
