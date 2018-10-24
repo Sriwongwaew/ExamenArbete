@@ -1,4 +1,4 @@
-﻿@model List<History>
+﻿@model List<Playlist>
 @{
     Layout = "_LayoutMood";
 }
@@ -9,19 +9,18 @@
 
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" asp-action="Historik">Historik</a>
+                <a class="nav-link " asp-action="Historik">Historik</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-action="HistorikSpellistor">Spellistor</a>
+                <a class="nav-link active" asp-action="HistorikSpellistor">Spellistor</a>
             </li>
-           
+
 
         </ul>
 
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Datum</th>
                     <th scope="col">Namn</th>
                     <th scope="col">Mood</th>
                 </tr>
@@ -29,15 +28,14 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td scope="row">@item.DateWhenPlayed</td>
-                    <td>
-                        <a href="@item.PlaylistLink">@item.PlaylistName</a>
-                    </td>
-                    <td>@item.Emotion</td>
-                </tr>
+                    <tr>
+                        <td>
+                            <a href="@item.PlayListLink">@item.PlayListName</a>
+                        </td>
+                        <td>@item.EmotionData</td>
+                    </tr>
                 }
-                
+
 
             </tbody>
         </table>
