@@ -222,7 +222,9 @@ namespace Mood2.Migrations
 
                     b.Property<int>("EmotionDataId");
 
-                    b.Property<string>("PlaylistLink");
+                    b.Property<string>("PlayListLink");
+
+                    b.Property<string>("PlayListName");
 
                     b.HasKey("Id");
 
