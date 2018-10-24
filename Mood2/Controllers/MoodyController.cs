@@ -31,6 +31,8 @@ namespace Mood2.Controllers
             _context = context;
         }
 
+    
+
 
         const string subscriptionKey = "5c7133efeece4731b6e6662bd6ff2278";
         const string uriBase = "https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect";
@@ -42,6 +44,12 @@ namespace Mood2.Controllers
             return View();
         }
 
+
+        public IActionResult HistorikSpellistor()
+        {
+            List<Playlist> ShowAllPlaylists =  _context.Playlist.ToList();
+            return View(ShowAllPlaylists);
+        }
 
         public IActionResult Info()
         {
