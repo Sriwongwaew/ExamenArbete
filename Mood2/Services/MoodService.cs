@@ -72,7 +72,7 @@ namespace Mood2.Services
             //-----------------------------------------------------------------------
 
 
-            var angerID = _context.EmotionData.Single(x => x.Name == "anger");
+            var angerID = _context.EmotionData.Single(x => x.Name == "anger" || x.Name == "contempt" || x.Name == "disgust");
 
             _context.Playlist.AddRange(new Playlist
             {
