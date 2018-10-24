@@ -9,6 +9,10 @@
     
 }
 
+a {
+    color: white;
+}
+
 @font-face {
     font-family: Amatic SC;
     src: url(AmaticSC-Regular.ttf);
