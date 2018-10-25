@@ -14,7 +14,7 @@ let UploadPicButtons = document.getElementById("UploadPicButtons");
 UploadPicButtons.style.display = "none";
 
 
-let test2 = document.getElementById("video");
+let test2 = document.getElementById("videofeed");
 
 function HideVideoFeed() {
     if (test2.style.display === "block") {
@@ -26,9 +26,16 @@ function HideCamPic() {
     if (MinCanvaso === "none") {
         MinCanvaso.style.display = "block";
     }
+    else {
+        test2.style.display = "block";
+    }
 }
 
-
+function HideVideo() {
+    if (test2 === "none") {
+        test2.style.display = "block";
+    }
+}
 
 function ShowOptions() {
     if (ChoosePicMethod.style.display === "none") {
@@ -84,6 +91,7 @@ var video;
 var webcamStream;
 
 function startWebcam() {
+    MinCanvaso.style.display = "none";
     HideCamPic();
     if (navigator.getUserMedia) {
         navigator.getUserMedia(

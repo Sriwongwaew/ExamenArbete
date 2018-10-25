@@ -65,6 +65,9 @@ h1 {
     margin-left: 340px;
     margin-top: 10px;
 }
+#TalkBubble a{
+    text-decoration:none;
+}
 
     #TalkBubble .content {
         display: inline-block;

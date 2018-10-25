@@ -51,25 +51,30 @@
             <div id="CameraButtons">
 
                 @*WEBCAM*@
-                <br /><button class="btn btnGrey" onclick="startWebcam();">Start WebCam</button>
-                <button class="btn btnGrey" onclick="snapshot();">Take Snapshot</button>
-                </p>
-                <video onclick="snapshot(this);" width=400 height=400 id="video" controls autoplay></video>
-                <p>
+                <div>
+                    <div style="margin-right:85px; margin-bottom:40px;">
+                        <br /><button class="btn btnGrey" onclick="startWebcam();" style="margin-left:100px;">Start WebCam</button>
+                        <button class="btn btnGrey" onclick="snapshot();">Take Snapshot</button>
 
-                    <div id="MinCanvaso" class="wrapper">
-                        <canvas id="myCanvas" width="400" height="300"></canvas>
                     </div>
-                    @*TEST2*@
-                    <form method="post" enctype="multipart/form-data" asp-controller="UploadPic" asp-action="Index">
-                        <div id="test2"></div>
+                    
+                    <div id="videofeed"><video width=400 height=400 id="video" controls autoplay></video></div>
+                   
 
-                        <div class="form-group">
-                            <div class="col-md-10">
-                                <input class="btn btnGrey" type="submit" value="Upload" />
-                            </div>
+                        <div id="MinCanvaso" class="wrapper" style="padding-top:40px;">
+                            <canvas id="myCanvas" width="400" height="300"></canvas>
                         </div>
-                    </form>
+                        @*TEST2*@
+                        <form method="post" enctype="multipart/form-data" asp-controller="UploadPic" asp-action="Index">
+                            <div id="test2" style="margin-top:50px;"></div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input class="btn btnGrey" type="submit" value="Upload" style="margin-top:-40px;"/>
+                                </div>
+                            </div>
+                        </form>
+                </div>
             </div>
             <div id="UploadPicButtons" >
                 @*TEST1*@
@@ -81,7 +86,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-9" style="margin-left: 40px;">
+                        <div class="col-md-9" style="margin-left: 40px;padding-top:20px;">
                             <input class="btn btnGrey" type="submit" value="Upload" />
                         </div>
                     </div>

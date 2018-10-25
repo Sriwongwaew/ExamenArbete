@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mood2.Migrations
 {
-    public partial class PlayListName : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,7 +68,8 @@ namespace Mood2.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateWhenPlayed = table.Column<DateTime>(nullable: false),
                     Emotion = table.Column<string>(nullable: true),
-                    Playlist = table.Column<string>(nullable: true)
+                    PlaylistLink = table.Column<string>(nullable: true),
+                    PlaylistName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

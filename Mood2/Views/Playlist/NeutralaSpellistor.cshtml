@@ -37,17 +37,17 @@
             <thead>
                 <tr>
                     <th scope="col">Namn</th>
-                    <th scope="col">Mood</th>
+                    <th scope="col" style="text-align:right; padding-right:200px;">Mood</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td >
                             <a href="@item.PlayListLink">@item.PlayListName</a>
                         </td>
-                        <td>@item.EmotionData.Name</td>
+                        <td style="text-align:right; padding-right:200px;">@item.EmotionData.Name</td>
                     </tr>
                 }
 

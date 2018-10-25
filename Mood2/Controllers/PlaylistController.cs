@@ -20,7 +20,7 @@ namespace Mood2.Controllers
 
         public IActionResult AllaSpellistor()
         {
-            List<Playlist> ShowAllPlaylists = _context.Playlist.ToList();
+            List<Playlist> ShowAllPlaylists = _context.Playlist.Include(x=> x.EmotionData).ToList();
             return View(ShowAllPlaylists);
         }
 

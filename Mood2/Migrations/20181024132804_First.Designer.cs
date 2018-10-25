@@ -10,8 +10,8 @@ using Mood2.Data;
 namespace Mood2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181024090353_kek")]
-    partial class kek
+    [Migration("20181024132804_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

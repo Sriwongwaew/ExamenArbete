@@ -13,15 +13,15 @@
 </head>
 <body>
     <nav class="navbar navbar-expand navbarBlue ">
-        <a style="width: 220px;" asp-action="Index"><img class="navbar-brand" src="~/img/NyLoggaIgen.png" style="width:100%" /></a>
+        <a style="width: 220px;" asp-action="../Moody/Index"><img class="navbar-brand" src="~/img/NyLoggaIgen.png" style="width:100%" /></a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <a asp-action="Info" style="padding-left: 40px;" class="Info nav-item active nav-link">Info</a>
-                <a asp-action="Historik" style="padding-left: 40px;" class="Info nav-item active nav-link">Senaste spelningarna</a>
-                <a asp-action="AllaSpellistor" style="padding-left: 40px;" class="Info nav-item active nav-link">Alla Spellistor</a>
+                <a asp-controller="Moody" asp-action="Info" style="padding-left: 40px;" class="Info nav-item active nav-link">Info</a>
+                <a asp-controller="Moody" asp-action="Historik" style="padding-left: 40px;" class="Info nav-item active nav-link">Senaste spelningarna</a>
+                <a asp-controller="Playlist" asp-action="AllaSpellistor" style="padding-left: 40px;" class="Info nav-item active nav-link">Alla Spellistor</a>
 
             </ul>
         </div>
