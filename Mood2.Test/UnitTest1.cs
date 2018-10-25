@@ -15,7 +15,7 @@ namespace Mood2.Test
         {
             HttpClient client = new HttpClient();
 
-            string testEndpointUrl = "https://localhost:44356/Test/CheckIfAllSpotifyLinksIsOkay";
+            string testEndpointUrl = "https://moodproject.azurewebsites.net/Test/CheckIfAllSpotifyLinksIsOkay";
 
             var message = client.GetAsync(testEndpointUrl).Result;
             Assert.IsTrue(message.IsSuccessStatusCode);

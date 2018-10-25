@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Mood2\Mood2.csproj" />
+    <ProjectReference Include="..\Mood2\Mood2.csproj" />
   </ItemGroup>
 
 </Project>
